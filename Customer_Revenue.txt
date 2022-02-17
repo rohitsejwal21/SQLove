@@ -1,0 +1,27 @@
+/*
+Customer Revenue In March
+Calculate the total revenue from each customer in March 2019. Include only customers who were active in March 2019. 
+
+Output the revenue along with the customer id and sort the results based on the revenue in descending order.
+*/
+
+TABLE: orders
+id                -int
+cust_id           -int
+order_date        -datetime
+order_details     -varchar
+total_order_cost  -int
+
+Code:
+SELECT
+    cust_id,
+    sum(total_order_cost) AS total_cust_rev
+FROM orders /*(
+    SELECT
+        *,
+        DATE_PART('month', order_date::date) AS month
+    FROM orders ) m */
+WHERE DATE_PART('month', order_date::date) = 3
+    --AND DATE_PART('year', order_date::date) = 2019 
+GROUP BY cust_id
+ORDER BY total_cust_rev DESC;
