@@ -1,0 +1,26 @@
+/*
+Workers With The Highest Salaries
+Find the titles of workers that earn the highest salary. Output the highest-paid title or multiple titles that share the highest salary.
+*/
+
+CODE:
+
+WITH max_salary_titles AS
+    (
+    SELECT
+        worker_title,
+        MAX(salary) as max_salary
+    FROM worker w
+    JOIN title t ON
+        t.worker_ref_id = w.worker_id
+    GROUP BY worker_title
+    ORDER BY max_salary DESC
+    )
+
+SELECT 
+    *
+FROM max_salary_titles
+WHERE max_salary = (SELECT 
+                        MAX(max_salary) 
+                    FROM max_salary_titles
+                    );
