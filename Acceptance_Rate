@@ -1,0 +1,32 @@
+--Acceptance Rate By Date
+--What is the overall friend acceptance rate by date? Your output should have the rate of acceptances by the date the request was sent. Order by the earliest date to latest.
+
+TABLE: fb_friend_requests
+user_id_sender    - varchar
+user_id_receiver  - varchar
+date              - datetime
+action            - varchar
+
+
+SELECT 
+    a.date,
+    count(b.user_id_receiver)/count(a.user_id_sender)::float as acceptance_rate
+FROM (
+    SELECT 
+        user_id_sender,
+        user_id_receiver,
+        date,
+        action
+    FROM fb_friend_requests
+    WHERE action = 'sent' ) a
+LEFT JOIN (
+    SELECT 
+        user_id_sender,
+        user_id_receiver,
+        date,
+        action
+    FROM fb_friend_requests
+    WHERE action = 'accepted' ) b ON 
+        b.user_id_sender = a.user_id_sender and
+        b.user_id_receiver = a.user_id_receiver
+GROUP BY a.date;
