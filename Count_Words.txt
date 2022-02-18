@@ -1,0 +1,22 @@
+/*
+Counting Instances in Text
+Find the number of times the words 'bull' and 'bear' occur in the contents. We're counting the number of times the words occur so words like 'bullish' should not be included in our count.
+Output the word 'bull' and 'bear' along with the corresponding number of occurrences.
+*/
+
+CODE:
+
+WITH all_words AS
+    (
+    SELECT
+        unnest(string_to_array(contents, ' ')) AS words
+    FROM google_file_store )
+
+SELECT 
+    words,
+    count(*)
+FROM all_words
+WHERE 
+    words ILIKE 'bull' OR
+    words ILIKE 'bear'
+GROUP BY words
