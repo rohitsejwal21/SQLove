@@ -1,0 +1,34 @@
+/*
+Premium vs Freemium
+Find the total number of downloads for paying and non-paying users by date. Include only records where non-paying customers have more downloads than paying customers. The output should be sorted by earliest date first and contain 3 columns date, non-paying downloads, paying downloads.
+*/
+
+CODE:
+
+WITH customers AS 
+    (
+    SELECT
+        d.date,
+        SUM(
+            CASE
+                WHEN paying_customer = 'yes' THEN downloads
+            END
+        ) AS paying,
+        SUM(
+            CASE
+                WHEN paying_customer = 'no' THEN downloads
+            END
+        ) AS non_paying
+    FROM ms_user_dimension u
+    JOIN ms_acc_dimension a ON
+        a.acc_id = u.acc_id
+    JOIN ms_download_facts d ON
+        d.user_id = u.user_id
+    GROUP BY date
+    ORDER BY date)
+        
+SELECT
+    *
+FROM customers
+WHERE non_paying > paying 
+    
