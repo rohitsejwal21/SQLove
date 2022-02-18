@@ -1,0 +1,39 @@
+/*
+Find the rate of processed tickets for each type
+*/
+
+CODE:
+
+/*
+WITH processed_details AS
+    (
+    SELECT 
+        type,
+        count(*) AS type_tickets,
+        sum(
+        CASE
+            WHEN processed = TRUE THEN 1
+            WHEN processed = FALSE THEN 0
+        END
+        ) AS total_processed
+    FROM facebook_complaints
+    GROUP BY type    
+    )
+
+SELECT
+    type,
+    total_processed/type_tickets::float AS processing_rate
+FROM processed_details
+
+*/
+
+SELECT 
+    type,
+    sum(
+    CASE
+        WHEN processed = TRUE THEN 1
+        WHEN processed = FALSE THEN 0
+    END
+    )/count(*)::float AS processing_rate
+FROM facebook_complaints
+GROUP BY type    
