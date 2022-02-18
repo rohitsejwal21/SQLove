@@ -1,0 +1,20 @@
+/*
+Top Businesses With Most Reviews
+Find the top 5 businesses with most reviews. Assume that each row has a unique business_id such that the total reviews for each business is listed on each row. Output the business name along with the total number of reviews and order your results by the total reviews in descending order.
+*/
+
+CODE:
+
+WITH business_review_ranking AS
+    (
+    SELECT
+        name,
+        review_count,
+        DENSE_RANK() over (ORDER BY review_count DESC) as rank
+    FROM yelp_business )
+
+SELECT
+    name,
+    review_count
+FROM business_review_ranking
+WHERE rank <= 5
