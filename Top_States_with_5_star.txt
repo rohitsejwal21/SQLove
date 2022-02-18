@@ -1,0 +1,32 @@
+/*
+Top 5 States With 5 Star Businesses
+Find the top 5 states with the most 5 star businesses. Output the state name along with the number of 5-star businesses and order records by the number of 5-star businesses in descending order. In case there are ties in the number of businesses, return all the unique states. If two states have the same result, sort them in alphabetical order.
+*/
+
+
+CODE:
+
+WITH top_business AS
+    (
+    SELECT
+        state,
+        count(*) as business_count
+        --rank() over (order by business_count) as rnk
+    FROM yelp_business
+    WHERE stars = 5
+    GROUP BY state
+    ORDER BY business_count DESC ),
+    
+    business_ranking AS
+    (
+    SELECT
+        *,
+        rank() over (order by business_count DESC) as rnk
+    FROM top_business
+    )
+    
+SELECT
+    state,
+    business_count
+FROM business_ranking
+WHERE rnk <= 5
