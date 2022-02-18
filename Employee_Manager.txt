@@ -1,0 +1,15 @@
+/*
+Employee and Manager Salaries
+Find employees who are earning more than their managers. Output the employee's first name along with the corresponding salary.
+*/
+
+CODE:
+
+SELECT 
+    e.first_name,
+    e.salary
+FROM employee e
+JOIN employee m ON
+    m.id = e.manager_id --AND
+    --e.salary > m.salary
+WHERE e.salary > m.salary
