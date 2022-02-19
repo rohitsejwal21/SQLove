@@ -1,0 +1,14 @@
+/*
+Find how many times each artist appeared on the Spotify ranking list
+Output the artist name along with the corresponding number of occurrences.
+Order records by the number of occurrences in descending order.
+*/
+
+CODE:
+
+select
+    artist,
+    count(*) AS times_on_list    
+from spotify_worldwide_daily_song_ranking
+GROUP BY artist
+ORDER BY times_on_list DESC
