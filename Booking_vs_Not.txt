@@ -1,0 +1,19 @@
+/*
+Bookings vs Non-Bookings
+Display the average number of times a user performed a search which led to a successful booking and the average number of times a user performed a search but did not lead to a booking. The output should have a column named action with values 'does not book' and 'books' as well as a 2nd column named average_searches with the average number of searches per action. Consider that the booking did not happen if the booking date is null.
+*/
+
+CODE:
+
+SELECT
+    CASE
+        WHEN ts_booking_at IS NOT NULL THEN 'books'
+        ELSE 'does not book'
+    END AS action,
+    AVG(n_searches) AS average_searches
+FROM airbnb_contacts cont
+JOIN airbnb_searches sear ON
+    sear.id_user = cont.id_guest AND
+    sear.ds_checkin = cont.ds_checkin AND
+    sear.ds_checkout = cont.ds_checkout
+GROUP BY 1
