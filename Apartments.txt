@@ -1,0 +1,15 @@
+/*
+Apartments in New York City and Harlem
+Find the search details of 50 apartment searches the Harlem neighborhood of New York City.
+*/
+
+CODE:
+
+SELECT 
+    *
+FROM airbnb_search_details
+WHERE 
+    property_type='Apartment' AND
+    city = 'NYC' AND
+    neighbourhood = 'Harlem'
+LIMIT 50
