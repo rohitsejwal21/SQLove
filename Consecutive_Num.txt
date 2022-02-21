@@ -1,0 +1,22 @@
+/*
+Write an SQL query to find all numbers that appear at least three times consecutively.
+Return the result table in any order.
+*/
+
+CODE:
+
+WITH lead_values AS
+  (
+  SELECT
+      num,
+      LEAD(num, 1) OVER () as 'f1',
+      LEAD(num, 2) OVER () as 'f2'
+  FROM Logs )
+
+SELECT
+    DISTINCT
+    num as 'ConsecutiveNums'
+FROM lead_values
+WHERE 
+    num = f1 AND
+    f1 = f2
