@@ -1,0 +1,26 @@
+/*
+Write an SQL query to display the records with three or more rows with consecutive id's, and the number of people is greater than or equal to 100 for each.
+*/
+
+CODE:
+
+WITH details AS
+(
+SELECT
+    *,
+    LEAD(people, 1) OVER () as 'f1',
+    LEAD(people, 2) OVER () as 'f2',
+    LAG(people, 1) OVER () as 'p1',
+    LAG(people, 2) OVER () as 'p2'
+FROM Stadium
+)
+
+SELECT 
+    id,
+    visit_date,
+    people
+FROM details
+WHERE 
+    ( people >= 100 AND f1 >= 100 AND f2 >= 100 ) OR
+    ( people >= 100 AND p1 >= 100 AND f1 >= 100 ) OR
+    ( people >= 100 AND p1 >= 100 AND p2 >= 100 )
