@@ -1,0 +1,24 @@
+/*
+Write an SQL query to find employees who have the highest salary in each of the departments.
+*/
+
+CODE:
+
+WITH department_rank AS
+(
+SELECT
+    e.name as 'Employee',
+    d.name as 'Department',
+    e.salary as 'Salary',
+    DENSE_RANK() OVER (partition by d.id ORDER BY e.salary DESC) as 'rnk'
+FROM Employee e
+JOIN Department d ON
+    e.departmentId = d.id
+)
+
+SELECT
+    Department,
+    Employee,
+    Salary
+FROM department_rank
+WHERE rnk = 1
