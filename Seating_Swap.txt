@@ -1,0 +1,46 @@
+/*
+Write an SQL query to swap the seat id of every two consecutive students. If the number of students is odd, the id of the last student is not swapped.
+*/
+
+CODE:
+
+WITH seating AS
+(
+SELECT
+    *,
+    LEAD(student, 1) OVER () as 'next_student',
+    LAG(student, 1) OVER () as 'prev_student'
+FROM Seat
+ORDER BY id
+)
+
+SELECT
+    id,
+    CASE
+        WHEN 
+            next_student IS NOT NULL AND
+            prev_student IS NULL
+        THEN next_student
+        
+        WHEN 
+            next_student IS NOT NULL AND
+            prev_student IS NOT NULL AND
+            id%2 = 0
+        THEN prev_student
+        WHEN 
+            next_student IS NOT NULL AND
+            prev_student IS NOT NULL AND
+            id%2 <> 0
+        THEN next_student
+        
+        WHEN 
+            next_student IS NULL AND
+            id%2 <> 0
+        THEN student
+        WHEN 
+            next_student IS NULL AND
+            id%2 = 0
+        THEN prev_student
+        
+    END as 'student'
+FROM seating
