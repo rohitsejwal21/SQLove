@@ -1,0 +1,18 @@
+/*
+Expensive Projects
+Given a list of projects and employees mapped to each project, calculate by the amount of project budget allocated to each employee . The output should include the project title and the project budget per employee rounded to the closest integer. Order your list by projects with the highest budget per employee first.
+*/
+
+CODE:
+
+SELECT
+    p.title,
+    CEILING((budget/count(e.emp_id)::float)::numeric) AS budget_per_employee
+FROM ms_projects p
+JOIN ms_emp_projects e ON 
+    e.project_id = p.id
+GROUP BY
+    p.title,
+    budget
+ORDER BY 
+    budget DESC
