@@ -15,8 +15,7 @@ SELECT
     MAX(review_score) OVER (partition by from_user) AS max_rev_user
 FROM airbnb_reviews ar
 JOIN airbnb_hosts ah ON
-    ar.to_user = ah.host_id AND
-    ar.from_user <> ah.host_id
+    ar.to_user = ah.host_id
 WHERE ar.from_type = 'guest' )
 
 SELECT 
