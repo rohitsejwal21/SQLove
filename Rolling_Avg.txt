@@ -12,7 +12,7 @@ WITH monthly_revenue AS
     (
     SELECT
         TO_CHAR(created_at, 'YYYY-MM') AS year_month,
-        AVG(purchase_amt) AS monthly_avg
+        SUM(purchase_amt) AS monthly_avg
     FROM amazon_purchases
     WHERE purchase_amt > 0
     GROUP BY 1
@@ -22,5 +22,5 @@ WITH monthly_revenue AS
 SELECT
     year_month,
     monthly_avg,
-    ROUND(AVG(monthly_avg) OVER (ROWS BETWEEN 2 PRECEDING AND CURRENT ROW), 2) AS rolling_avg_revenue
+    AVG(monthly_avg) OVER (ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS rolling_avg_revenue
 FROM monthly_revenue
