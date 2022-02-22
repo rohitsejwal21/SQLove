@@ -1,0 +1,37 @@
+/*
+New Products
+You are given a table of product launches by company by year. Write a query to count the net difference between the number of products companies launched in 2020 for the first time with the number of products companies launched in the previous year. Output the name of the companies and a net difference of net products released for 2020 compared to the previous year. If a company is new or had no products in 2019, then any product released in 2020 would be considered as new.
+*/
+
+CODE:
+
+WITH models_2019 AS
+    (
+    SELECT
+        company_name,
+        product_name,
+        count(*) OVER (partition by company_name) AS n_products
+    FROM car_launches
+    WHERE year = 2019
+    --GROUP BY company_name
+    ),
+    
+    models_2020 AS
+    (
+    SELECT
+        company_name,
+        product_name,
+        count(*) OVER (partition by company_name) AS n_products
+    FROM car_launches
+    WHERE year = 2020
+    --GROUP BY company_name
+    )
+
+SELECT
+    DISTINCT
+    m1.company_name,
+    abs(m2.n_products - m1.n_products) AS net_diff
+FROM models_2019 m1 
+ JOIN models_2020 m2 ON
+    --m2.product_name <> m1.product_name AND
+    m2.company_name = m1.company_name
