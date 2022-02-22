@@ -1,0 +1,21 @@
+/*
+3 Bed Minimum
+Find the average number of beds in each neighborhood that has at least 3 beds in total.
+Output results along with the neighborhood name and sort the results based on the number of average beds in descending order.
+*/
+
+CODE:
+
+WITH beds AS
+    (
+    SELECT 
+        neighbourhood,
+        AVG(beds) AS avg_beds,
+        SUM(beds) AS total_beds
+    FROM airbnb_search_details
+    GROUP BY neighbourhood
+    ORDER BY avg_beds DESC )
+
+SELECT neighbourhood, avg_beds
+FROM beds
+WHERE total_beds >= 3
