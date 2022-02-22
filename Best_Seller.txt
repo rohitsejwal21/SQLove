@@ -1,0 +1,32 @@
+/*
+Best Selling Item
+Find the best selling item for each month (no need to separate months by year) where the biggest total invoice was paid. The best selling item is calculated using the formula (unitprice * quantity). Output the description of the item along with the amount paid.
+*/
+
+CODE:
+
+WITH monthly_orders AS
+    (
+    SELECT
+        *,
+        quantity * unitprice AS total_order_val,
+        TO_CHAR(invoicedate, 'MM') AS invoice_month
+    FROM online_retail
+    ),
+    
+    monthly_best_seller AS
+    (
+    SELECT
+        invoice_month,
+        MAX(total_order_val) AS max_order_val
+    FROM monthly_orders
+    GROUP BY invoice_month
+    )
+    
+SELECT 
+    description,
+    total_order_val
+FROM monthly_orders mo
+JOIN monthly_best_seller mbs ON
+    mbs.max_order_val = mo.total_order_val AND
+    mbs.invoice_month = mo.invoice_month
