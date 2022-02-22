@@ -9,29 +9,25 @@ WITH models_2019 AS
     (
     SELECT
         company_name,
-        product_name,
-        count(*) OVER (partition by company_name) AS n_products
+        count(*) AS n_products
     FROM car_launches
     WHERE year = 2019
-    --GROUP BY company_name
+    GROUP BY company_name
     ),
     
     models_2020 AS
     (
     SELECT
         company_name,
-        product_name,
-        count(*) OVER (partition by company_name) AS n_products
+        count(*) AS n_products
     FROM car_launches
     WHERE year = 2020
-    --GROUP BY company_name
+    GROUP BY company_name
     )
 
 SELECT
-    DISTINCT
     m1.company_name,
     abs(m2.n_products - m1.n_products) AS net_diff
 FROM models_2019 m1 
- JOIN models_2020 m2 ON
-    --m2.product_name <> m1.product_name AND
+JOIN models_2020 m2 ON
     m2.company_name = m1.company_name
