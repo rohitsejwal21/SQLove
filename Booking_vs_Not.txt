@@ -12,8 +12,7 @@ SELECT
     END AS action,
     AVG(n_searches) AS average_searches
 FROM airbnb_contacts cont
-JOIN airbnb_searches sear ON
+RIGHT JOIN airbnb_searches sear ON
     sear.id_user = cont.id_guest AND
-    sear.ds_checkin = cont.ds_checkin AND
-    sear.ds_checkout = cont.ds_checkout
+    sear.ds_checkin = cont.ds_checkin
 GROUP BY 1
