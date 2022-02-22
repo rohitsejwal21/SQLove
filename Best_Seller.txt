@@ -8,25 +8,26 @@ CODE:
 WITH monthly_orders AS
     (
     SELECT
-        *,
-        quantity * unitprice AS total_order_val,
+        description,
+        SUM(quantity * unitprice) AS total_order_val,
         TO_CHAR(invoicedate, 'MM') AS invoice_month
     FROM online_retail
+    GROUP BY 
+        description, 
+        invoice_month
     ),
     
-    monthly_best_seller AS
+    order_rank AS
     (
-    SELECT
-        invoice_month,
-        MAX(total_order_val) AS max_order_val
+    SELECT 
+        *,  
+        RANK() OVER (partition by invoice_month ORDER BY total_order_val DESC) AS rnk
     FROM monthly_orders
-    GROUP BY invoice_month
     )
-    
-SELECT 
+
+SELECT
+    invoice_month,
     description,
     total_order_val
-FROM monthly_orders mo
-JOIN monthly_best_seller mbs ON
-    mbs.max_order_val = mo.total_order_val AND
-    mbs.invoice_month = mo.invoice_month
+FROM order_rank
+WHERE rnk = 1
