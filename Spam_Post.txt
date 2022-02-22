@@ -1,0 +1,17 @@
+/*
+Spam Posts
+Calculate the percentage of spam posts in all viewed posts by day. A post is considered a spam if a string "spam" is inside keywords of the post. Note that the facebook_posts table stores all posts posted by users. The facebook_post_views table is an action table denoting if a user has viewed a post.
+*/
+
+CODE:
+
+SELECT
+    post_date,
+    SUM(CASE
+            WHEN post_keywords ILIKE '%spam%' THEN 1.0
+            ELSE 0.0
+        END)/count(*) * 100 AS percentage_spam
+FROM facebook_posts fp
+JOIN facebook_post_views fv ON
+    fv.post_id = fp.post_id
+GROUP BY post_date
