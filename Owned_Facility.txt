@@ -1,0 +1,17 @@
+/*
+'BAKERY' Owned Facilities
+Find the owner_name and the pe_description of facilities owned by 'BAKERY' where low-risk cases have been reported.
+*/
+
+CODE:
+
+SELECT
+    owner_name,
+    pe_description
+FROM los_angeles_restaurant_health_inspections
+WHERE
+    owner_name ILIKE '%BAKERY%' AND
+    pe_description ILIKE '%LOW%'
+GROUP BY
+    owner_name,
+    pe_description
