@@ -1,0 +1,12 @@
+/*
+Cheapest Properties
+Find the price of the cheapest property for every city.
+*/
+
+CODE:
+
+SELECT
+    city,
+    MIN(price) AS cheapest_property
+FROM airbnb_search_details
+GROUP BY city
