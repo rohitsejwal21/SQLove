@@ -1,0 +1,15 @@
+/*
+Number of Employees Per Department
+Find the number of employees in each department.
+Output the department name along with the corresponding number of employees.
+Sort records based on the number of employees in descending order.
+*/
+
+CODE:
+
+SELECT
+    department,
+    count(*) AS n_employees
+FROM employee
+GROUP BY department
+ORDER BY n_employees DESC
