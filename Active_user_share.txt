@@ -6,9 +6,10 @@ Return the share of monthly active users in the United States (US). Active users
 CODE:
 
 SELECT
-    SUM(CASE
+    SUM(
+        CASE
             WHEN status = 'open' THEN 1.0
             ELSE 0.0
-        END)/count(user_id) AS active_user_share
+        END) / count(user_id) AS active_user_share
 FROM fb_active_users
 WHERE country = 'USA'
