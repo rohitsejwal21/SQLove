@@ -1,0 +1,23 @@
+/*
+Day 1 Common Reactions
+Find the most common reaction for day 1 by counting the number of occurrences for each reaction. Output the reaction alongside its number of occurrences.
+*/
+
+CODE:
+
+WITH reactions AS
+    (
+    SELECT
+        reaction,   
+        count(*) as n_occurance,
+        RANK() OVER (ORDER BY count(*) DESC) as rank
+    FROM facebook_reactions
+    WHERE date_day = 1
+    GROUP BY reaction
+    )
+
+SELECT
+    reaction,
+    n_occurance
+FROM reactions
+WHERE rank = 1
