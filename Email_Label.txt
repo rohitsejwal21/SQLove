@@ -1,0 +1,29 @@
+/*
+User Email Labels
+Find the number of emails received by each user under each built-in email label. The email labels are: 'Promotion', 'Social', and 'Shopping'. Output the user along with the number of promotion, social, and shopping mails count,.
+*/
+
+CODE:
+
+SELECT
+    e.to_user AS user,
+    SUM(
+        CASE
+            WHEN l.label = 'Promotion' THEN 1
+            ELSE 0
+        END) AS promotion_count,
+    SUM(
+        CASE
+            WHEN l.label = 'Social' THEN 1
+            ELSE 0
+        END) AS social_count,
+    SUM(
+        CASE
+            WHEN l.label = 'Shopping' THEN 1
+            ELSE 0
+        END) AS shopping_count
+FROM google_gmail_emails e
+JOIN google_gmail_labels l ON
+    l.email_id = e.id AND
+    l.label IN ('Promotion', 'Social', 'Shopping')
+GROUP BY e.to_user
