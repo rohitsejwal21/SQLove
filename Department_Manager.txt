@@ -1,0 +1,25 @@
+/*
+Manager of the Largest Department
+Given a list of a company's employees, find the name of the manager from the largest department. Output their first and last name.
+*/
+
+CODE:
+
+WITH department_rank AS
+    (
+    SELECT
+        department_name,
+        RANK() OVER (ORDER BY COUNT(id) DESC) AS rnk
+    FROM az_employees
+    GROUP BY department_name
+    )
+
+SELECT
+    e.first_name,
+    e.last_name
+FROM az_employees e
+JOIN department_rank r ON
+    r.department_name = e.department_name
+WHERE
+    r.rnk = 1 AND
+    e.position ILIKE '%manager%'
