@@ -1,0 +1,20 @@
+/*
+Class Performance
+You are given a table containing assignment scores of students in a class. Write a query that identifies the largest difference in total score of all assignments.
+Output just the difference in total score between the two students.
+*/
+
+CODE:
+
+WITH student_scores AS
+    (
+    SELECT
+        student,
+        SUM(assignment1 + assignment2 + assignment3) AS total_score
+    FROM box_scores
+    GROUP BY student
+    )
+
+SELECT
+    MAX(total_score) - MIN(total_score) AS score_difference
+FROM student_scores
