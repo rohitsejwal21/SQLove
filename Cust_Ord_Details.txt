@@ -1,0 +1,25 @@
+/*
+Customer Orders and Details
+Find the number of orders, the number of customers, and the total cost of orders for each city. Only include cities that have made at least 5 orders and count all customers in each city even if they did not place an order.
+Output each calculation along with the corresponding city name.
+*/
+
+CODE:
+
+WITH order_details AS
+    (
+    SELECT
+        city,
+        count(DISTINCT c.id) as n_customers,
+        count(DISTINCT o.id) as n_orders,
+        SUM(total_order_cost)
+    FROM customers c
+    LEFT JOIN orders o ON
+        o.cust_id = c.id
+    GROUP BY city
+    )
+
+SELECT
+    *
+FROM order_details
+WHERE n_orders >= 5
