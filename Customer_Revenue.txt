@@ -24,4 +24,4 @@ FROM orders /*(
 WHERE DATE_PART('month', order_date::date) = 3
     --AND DATE_PART('year', order_date::date) = 2019 
 GROUP BY cust_id
-ORDER BY total_cust_rev DESC;
+ORDER BY total_cust_rev DESC
