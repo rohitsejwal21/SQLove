@@ -1,0 +1,53 @@
+/*
+Favorite Customer
+Find "favorite" customers based on the order count and the total cost of orders.
+A customer is considered as a favorite if he or she has placed more than 3 orders and with the total cost of orders more than $100.
+Output the customer's first name, city, number of orders, and total cost of orders.
+*/
+
+CODE:
+
+SELECT
+    c.first_name,
+    c.city,
+    COUNT(o.id) AS user_orders,
+    SUM(o.total_order_cost) AS total_user_cost
+FROM customers c
+JOIN orders o ON
+    o.cust_id = c.id
+GROUP BY 
+    c.id,
+    c.first_name,
+    c.city
+HAVING
+    COUNT(o.id) > 3 AND
+    SUM(o.total_order_cost) > 100
+    
+    
+/*
+WITH cust_orders AS
+    (
+    SELECT
+        c.first_name,
+        c.city,
+        COUNT(o.id) AS user_orders,
+        SUM(o.total_order_cost) AS total_user_cost
+    FROM customers c
+    JOIN orders o ON
+        o.cust_id = c.id
+    GROUP BY 
+        o.cust_id
+    )
+
+SELECT
+    first_name,
+    city,
+    user_orders,
+    total_user_cost
+FROM customers c
+JOIN cust_orders co ON
+    co.cust_id = c.id
+WHERE 
+    user_orders > 3 AND
+    total_user_cost > 100
+*/
