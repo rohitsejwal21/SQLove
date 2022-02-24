@@ -1,0 +1,14 @@
+/*
+User Feature Completion
+An app has product features that help guide users through a marketing funnel. Each feature has "steps" (i.e., actions users can take) as a guide to complete the funnel. What is the average percentage of completion for each feature?
+*/
+
+CODE:
+
+SELECT
+    f.feature_id,
+    SUM(step_reached)/SUM(n_steps) * 100 AS percentage_completion
+FROM facebook_product_features f
+LEFT JOIN facebook_product_features_realizations r ON
+    r.feature_id = f.feature_id
+GROUP BY f.feature_id
