@@ -1,0 +1,12 @@
+/*
+Successfully Sent Messages
+Find the ratio of successfully received messages to sent messages.
+*/
+
+CODE:
+
+SELECT
+    COUNT(r.message_id) / COUNT(s.message_id)::float as ratio
+FROM facebook_messages_sent s
+LEFT JOIN facebook_messages_received r ON
+    r.message_id = s.message_id
