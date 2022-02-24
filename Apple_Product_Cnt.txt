@@ -1,0 +1,20 @@
+/*
+Apple Product Counts
+Find the number of Apple product users and the number of total users with a device for each language. Assume Apple products are only MacBook-Pro, iPhone 5s, and iPad-air.  Output the language along with the total number of Apple users and users with any device. Order your results based on the number of total users in descending order.
+*/
+
+CODE:
+
+SELECT
+    u.language,
+    COUNT(DISTINCT e.user_id) AS total_users,
+    COUNT(DISTINCT
+        CASE
+            WHEN device IN ('iphone 5s', 'macbook pro', 'ipad air') THEN e.user_id
+            ELSE NULL
+        END) AS apple_users
+FROM playbook_events e
+JOIN playbook_users u ON
+    u.user_id = e.user_id
+GROUP BY u.language
+ORDER BY 2 DESC
