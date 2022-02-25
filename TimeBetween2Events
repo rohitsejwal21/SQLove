@@ -1,0 +1,28 @@
+/*
+Time Between Two Events
+Meta/Facebook's web logs capture every action from users starting from page loading to page scrolling. Find the user with the least amount of time between a page load and their first scroll down. Your output should include the user id, page load time, first scroll down time, and time between the two events in seconds.
+*/
+
+CODE:
+
+WITH time_difference AS
+    (
+    SELECT
+        f1.user_id,
+        f1.timestamp as page_load_time,
+        f2.timestamp as pg_scroll_time,
+        (f2.timestamp - f1.timestamp)::TIME AS time_diff
+    FROM facebook_web_log f1 
+    JOIN facebook_web_log f2 ON
+        f2.user_id = f1.user_id
+    WHERE 
+        f1.action = 'page_load' AND
+        f2.action = 'scroll_down' AND
+        f2.timestamp > f1.timestamp
+    ORDER BY time_diff    
+    )
+
+SELECT
+    *
+FROM time_difference
+WHERE time_diff = (SELECT MIN(time_diff) FROM time_difference)
