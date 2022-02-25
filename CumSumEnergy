@@ -1,0 +1,46 @@
+/*
+Cum Sum Energy Consumption
+Calculate the running total (i.e., cumulative sum) energy consumption of the Meta/Facebook data centers in all 3 continents by the date. Output the date, running total energy consumption, and running total percentage rounded to the nearest whole number.
+*/
+
+CODE:
+
+WITH total_energy AS
+    (
+    SELECT
+        *
+    FROM fb_eu_energy
+    UNION ALL
+    SELECT
+        *
+    FROM fb_na_energy
+    UNION ALL
+    SELECT
+        *
+    FROM fb_asia_energy    
+    ),
+
+    energy AS
+    (
+    SELECT
+        date,
+        SUM(consumption) AS total_consumption
+    FROM total_energy
+    GROUP BY date
+    ORDER BY date
+    ),
+    
+    cum_sum AS
+    (
+    SELECT
+        date,
+        SUM(total_consumption) OVER (ORDER BY date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cum_consumption,
+        SUM(total_consumption) OVER () AS total_sum
+    FROM energy
+    )
+
+SELECT
+    date,
+    cum_consumption,
+    ROUND(cum_consumption / total_sum * 100) AS percentage_consumption
+FROM cum_sum
