@@ -1,0 +1,41 @@
+/*
+Rank Variance Per Country
+Which countries have risen in the rankings based on the number of comments between Dec 2019 vs Jan 2020? Hint: Avoid gaps between ranks when ranking countries.
+*/
+
+CODE:
+
+WITH ranking_2019 AS
+    (
+    SELECT
+        country,
+        SUM(number_of_comments) AS n_comments,
+        DENSE_RANK() OVER (ORDER BY SUM(number_of_comments) DESC) AS rank_19
+    FROM fb_comments_count cc
+    JOIN fb_active_users au ON
+        au.user_id = cc.user_id
+    WHERE TO_CHAR(created_at, 'YYYY-MM') = '2019-12'
+    GROUP BY country
+    ),
+    
+    ranking_2020 AS
+    (
+    SELECT
+        country,
+        SUM(number_of_comments) AS n_comments,
+        DENSE_RANK() OVER (ORDER BY SUM(number_of_comments) DESC) AS rank_20
+    FROM fb_comments_count cc
+    JOIN fb_active_users au ON
+        au.user_id = cc.user_id
+    WHERE TO_CHAR(created_at, 'YYYY-MM') = '2020-01'
+    GROUP BY country
+    )
+    
+SELECT
+    r19.country
+FROM ranking_2019 r19
+JOIN ranking_2020 r20 ON
+    r20.country = r19.country 
+WHERE
+    r19.rank_19 - r20.rank_20 > 0
+    
