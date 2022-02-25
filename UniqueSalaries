@@ -1,0 +1,23 @@
+/*
+Unique Salaries
+Find the top three unique salaries for each department. Output the department name and the top 3 unique salaries by each department. Order your results alphabetically by department and then by highest salary to lowest.
+*/
+
+CODE:
+
+WITH salary_ranking AS
+    (
+    SELECT
+        department,
+        salary,
+        DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS rnk
+    FROM twitter_employee
+    )
+
+SELECT
+    department,
+    salary
+FROM salary_ranking
+WHERE rnk <=3
+GROUP BY department, salary
+ORDER BY department, salary DESC
