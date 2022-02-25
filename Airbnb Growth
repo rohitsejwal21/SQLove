@@ -1,0 +1,36 @@
+/*
+Growth of Airbnb
+Estimate the growth of Airbnb each year using the number of hosts registered as the growth metric. The rate of growth is calculated by taking ((number of hosts registered in the current year - number of hosts registered in the previous year) / the number of hosts registered in the previous year) * 100.
+Output the year, number of hosts in the current year, number of hosts in the previous year, and the rate of growth. Round the rate of growth to the nearest percent and order the result in the ascending order based on the year.
+Assume that the dataset consists only of unique hosts, meaning there are no duplicate hosts listed.
+*/
+
+CODE:
+
+WITH host_year AS
+    (
+    SELECT
+        DATE_PART('year', host_since) AS year,
+        COUNT(*) AS n_hosts
+    FROM airbnb_search_details
+    GROUP BY 1
+    ORDER BY 1    
+    ),
+    
+    host_growth AS
+    (
+    SELECT
+        *,
+        LAG(n_hosts, 1) OVER () AS p_n_hosts
+    FROM host_year
+    )
+    
+SELECT
+    *,
+    CASE
+        WHEN p_n_hosts IS NULL THEN NULL
+        ELSE
+            ROUND(((n_hosts - p_n_hosts) / p_n_hosts::float)*100)
+    END AS growth_percentage
+FROM host_growth
+    
