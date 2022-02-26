@@ -1,0 +1,23 @@
+/*
+Cheapest Neighborhoods With Real Beds And Internet
+Find neighborhoods where you can sleep on a real bed in a villa with internet while paying the lowest price possible.
+*/
+
+CODE:
+
+SELECT
+    neighbourhood
+FROM
+    (
+    SELECT
+        neighbourhood,
+        RANK() OVER (ORDER BY MIN(price)) AS rnk
+    FROM airbnb_search_details
+    WHERE 
+        property_type = 'Villa' AND
+        bed_type = 'Real Bed' AND
+        amenities ILIKE '%internet%' AND
+        neighbourhood IS NOT NULL
+    GROUP BY neighbourhood
+    ) m
+WHERE rnk = 1
