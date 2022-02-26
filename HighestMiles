@@ -1,0 +1,23 @@
+/*
+Highest Total Miles
+You’re given a table of Uber rides that contains the mileage and the purpose for the business expense.  You’re asked to find business purposes that generate the most miles driven for passengers that use Uber for their business transportation. Find the top 3 business purpose categories by total mileage.
+*/
+
+CODE:
+
+WITH uber_rides AS
+    (
+    SELECT
+        purpose,
+        SUM(miles) AS total_miles,
+        DENSE_RANK() OVER (ORDER BY SUM(miles) DESC) AS rnk
+    FROM my_uber_drives
+    WHERE purpose IS NOT NULL
+    GROUP BY purpose 
+    )
+    
+SELECT
+    purpose,
+    total_miles
+FROM uber_rides
+WHERE rnk <= 3
