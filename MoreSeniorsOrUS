@@ -1,0 +1,24 @@
+/*
+Find whether the number of seniors works at Meta/Facebook is higher than its number of USA based employees
+Find whether the number of senior workers (i.e., more experienced) at Meta/Facebook is higher than number of USA based employees at Facebook/Meta.
+If the number of seniors is higher then output as 'More seniors'. Otherwise, output as 'More USA-based'.
+*/
+
+CODE:
+
+SELECT
+    CASE
+        WHEN us_count < senior_count THEN 'More seniors'
+        ELSE 'More USA-based'
+    END AS Employees
+FROM
+    (
+    SELECT
+        COUNT(CASE 
+            WHEN location = 'USA' THEN 1
+        END) AS us_count,
+        COUNT(CASE 
+            WHEN is_senior = 'TRUE' THEN 1
+        END) AS senior_count
+    FROM facebook_employees
+    ) a
