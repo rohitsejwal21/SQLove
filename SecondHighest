@@ -1,0 +1,17 @@
+/*
+Second Highest Salary
+Find the second highest salary of employees.
+*/
+
+CODE:
+
+SELECT 
+    salary
+FROM
+    (
+    SELECT
+        salary,
+        DENSE_RANK() OVER (ORDER BY salary DESC) AS rnk
+    FROM employee
+    ) r
+WHERE rnk = 2
