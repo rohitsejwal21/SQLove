@@ -1,0 +1,18 @@
+/*
+Blocked Users
+You are given a table of users who have been blocked from Facebook, together with the date, duration, and the reason for the blocking. The duration is expressed as the number of days after blocking date and if this field is empty, this means that a user is blocked permanently. 
+For each blocking reason, count how many users were blocked in December 2021. Include both the users who were blocked in December 2021 and those who were blocked before but remained blocked for at least a part of December 2021.
+*/
+
+CODE:
+
+SELECT block_reason,
+       count(DISTINCT user_id) AS n_users
+FROM fb_blocked_users
+WHERE 
+    TO_CHAR(block_date, 'YYYY-MM') = '2021-12' OR
+    (block_date < '2021-12-01' AND 
+        (block_duration IS NULL OR
+        (datediff('2021-12-01', block_date) <= block_duration))
+    )
+GROUP BY block_reason
