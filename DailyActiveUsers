@@ -1,0 +1,23 @@
+/*
+Daily Active Users
+Find the average daily active users for January 2021 for each account. Your output should have account_id and the average daily count for that account.
+*/
+
+CODE:
+
+WITH daily_users AS
+    (
+    SELECT
+        account_id,
+        date,
+        COUNT(DISTINCT user_id) as n_users
+    FROM sf_events
+    WHERE TO_CHAR(date, 'YYYY-MM') = '2021-01'
+    GROUP BY account_id, date
+    )
+    
+SELECT
+    account_id,
+    SUM(n_users)/31.0 AS average_daily_users
+FROM daily_users
+GROUP BY account_id
