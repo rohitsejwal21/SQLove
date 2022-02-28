@@ -1,0 +1,23 @@
+/*
+Total Searches For Rooms
+Find the total number of searches for each room type (apartments, private, shared) by city.
+*/
+
+CODE:
+
+SELECT
+    city,
+    COUNT(
+        CASE
+            WHEN room_type = 'Entire home/apt' THEN 1
+        END) AS Apartments,
+    COUNT(
+        CASE
+            WHEN room_type = 'Private room' THEN 1
+        END) AS Private_Rooms,
+    COUNT(
+        CASE
+            WHEN room_type = 'Shared room' THEN 1
+        END) AS Shared_Rooms
+FROM airbnb_search_details
+GROUP BY city
