@@ -1,0 +1,22 @@
+/*
+Top Three Classes
+The marketing department wants to launch a new promotion for the most successful product classes. What are the top 3 product classes by number of sales?
+*/
+
+CODE:
+
+WITH class_rank AS
+    (
+    SELECT
+        fp.product_class,
+        DENSE_RANK() OVER (ORDER BY COUNT(*) DESC) AS rnk
+    FROM facebook_products fp
+    JOIN facebook_sales fs ON
+        fs.product_id = fp.product_id
+    GROUP BY product_class
+    )
+
+SELECT
+    product_class
+FROM class_rank
+WHERE rnk <= 3
