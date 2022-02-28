@@ -1,0 +1,24 @@
+/*
+Recent Refinance Submissions
+Write a query that joins this submissions table to the loans table and returns the total loan balance on each user’s most recent ‘Refinance’ submission. Return all users and the balance for each of them.
+*/
+
+CODE:
+
+SELECT
+    user_id,
+    balance
+FROM
+    (
+    SELECT
+        user_id,
+        created_at,
+        balance,
+        MAX(created_at) OVER (PARTITION BY user_id) AS latest_date
+    FROM loans l
+    JOIN submissions s ON
+        s.loan_id = l.id
+    WHERE 
+        l.type = 'Refinance'
+    ) a
+WHERE created_at = latest_date
