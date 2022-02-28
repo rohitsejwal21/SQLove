@@ -1,0 +1,17 @@
+/*
+Percentage Of Revenue Loss
+For each service, calculate the percentage of incomplete orders along with the revenue loss percentage. Your output should include the name of the service, percentage of incomplete orders, and revenue loss from the incomplete orders.
+*/
+
+CODE:
+
+SELECT
+    service_name,
+    SUM(CASE
+            WHEN status_of_order <> 'Completed' THEN number_of_orders
+        END) / SUM(number_of_orders) * 100 AS perc_orders,
+    SUM(CASE
+            WHEN status_of_order <> 'Completed' THEN monetary_value
+        END)/SUM(monetary_value)::float * 100 AS perc_revenue
+FROM uber_orders
+GROUP BY service_name
