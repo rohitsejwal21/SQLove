@@ -1,0 +1,23 @@
+/*
+Customers with Specific Brands
+In the latest promotion, the marketing department wants to target customers who have bought products from two specific brands. 
+Prepare a list of customers who purchased products from both the "Fort West" and the "Golden" brands.
+*/
+
+CODE:
+
+SELECT
+    customer_id
+FROM
+    (
+    SELECT
+        customer_id,
+        COUNT(DISTINCT brand_name) AS n_brands
+    FROM facebook_products fp
+    JOIN facebook_sales fs ON
+        fs.product_id = fp.product_id
+    WHERE
+        brand_name IN ('Fort West', 'Golden')
+    GROUP BY customer_id
+    ) customer_counts
+WHERE n_brands = 2
