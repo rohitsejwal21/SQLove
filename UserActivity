@@ -1,0 +1,12 @@
+/*
+Users Activity Per Month Day
+Return a distribution of users activity per day of the month
+*/
+
+CODE:
+
+SELECT
+    TO_CHAR(post_date, 'DD') AS day,
+    COUNT(*)
+FROM facebook_posts
+GROUP BY day
