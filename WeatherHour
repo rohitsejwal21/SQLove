@@ -1,0 +1,16 @@
+/*
+Find the percentage of rides for each weather and the hour
+Find the percentage of total rides each weather-hour combination constitutes
+Output the weather, hour along with the corresponding percentage.
+Sort records by the weather and the hour in ascending order.
+*/
+
+CODE:
+
+SELECT
+    weather,
+    hour,
+    COUNT(*)/SUM(COUNT(*)) OVER () AS percent
+FROM lyft_rides
+GROUP BY weather, hour
+ORDER BY weather, hour
