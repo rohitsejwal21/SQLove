@@ -1,0 +1,49 @@
+/*
+Most Expensive And Cheapest Wine
+Find the cheapest and the most expensive variety in each region. Output the region along with the corresponding most expensive and the cheapest variety.
+*/
+
+CODE:
+
+WITH regions AS
+    (
+    SELECT
+        variety,
+        region_1 AS region,
+        price
+    FROM winemag_p1
+    UNION ALL
+    SELECT
+        variety,
+        region_2 AS region,
+        price
+    FROM winemag_p1
+    ),
+    
+    region_ranking AS
+    (
+    SELECT
+        *,
+        RANK() OVER (PARTITION BY region ORDER BY price DESC) AS highest_rank,
+        RANK() OVER (PARTITION BY region ORDER BY price) AS lowest_rank
+    FROM regions
+    WHERE 
+        region IS NOT NULL AND
+        price IS NOT NULL
+    )
+
+SELECT
+    region,
+    MAX(CASE
+        WHEN highest_rank = 1 THEN variety
+        ELSE NULL
+    END) AS most_expensive_variety,
+    MAX(CASE
+        WHEN lowest_rank = 1 THEN variety
+        ELSE NULL
+    END) AS least_expensive_variety
+FROM region_ranking
+WHERE 
+    highest_rank = 1 OR 
+    lowest_rank = 1
+GROUP BY region
