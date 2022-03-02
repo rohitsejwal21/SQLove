@@ -1,0 +1,42 @@
+/*
+Common Letters
+Find the top 3 most common letters across all the words from both the tables. Output the letter along with the number of occurrences and order records in descending order based on the number of occurrences.
+*/
+
+CODE:
+
+WITH all_words AS
+    (
+    SELECT
+        lower(unnest(string_to_array(contents,' '))) AS word
+    FROM google_file_store
+    UNION ALL
+    SELECT
+        lower(unnest(string_to_array(words1, ','))) AS word
+    FROM google_word_lists
+    UNION ALL
+    SELECT
+        lower(unnest(string_to_array(words2, ','))) AS word
+    FROM google_word_lists
+    ),
+    
+    all_letters AS
+    (
+    SELECT
+        unnest(regexp_split_to_array(word, '')) AS letter
+    FROM all_words
+    )
+    
+SELECT
+    letter,
+    n_occurance
+FROM
+    (
+    SELECT 
+        letter,
+        COUNT(*) AS n_occurance,
+        DENSE_RANK() OVER (ORDER BY COUNT(*) DESC) AS rnk
+    FROM all_letters
+    GROUP BY letter
+    ) r
+WHERE rnk <= 3
