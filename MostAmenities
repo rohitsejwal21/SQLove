@@ -1,0 +1,20 @@
+/*
+City With Most Amenities
+You're given a dataset of searches for properties on Airbnb. For simplicity, let's say that each search result (i.e., each row) represents a unique host. Find the city with the most amenities across all their host's properties. Output the name of the city.
+*/
+
+CODE:
+
+WITH most_amenities AS
+(
+SELECT
+    city,
+    DENSE_RANK() OVER (ORDER BY SUM(array_length(string_to_array(amenities, ','), 1)) DESC) AS rnk
+FROM airbnb_search_details
+GROUP BY city
+)
+
+SELECT
+    city
+FROM most_amenities
+WHERE rnk = 1
