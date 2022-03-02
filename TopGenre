@@ -1,0 +1,27 @@
+/*
+Find the genre of the person with the most number of oscar winnings
+Find the genre of the person with the most number of oscar winnings.
+If there are more than one person with the same number of oscar wins, return the first one in alphabetic order.
+*/
+
+CODE:
+
+WITH most_wins AS
+    (
+    SELECT
+        nominee,
+        COUNT(*) AS oscar_wins
+    FROM oscar_nominees
+    WHERE winner = TRUE
+    GROUP BY nominee
+    ORDER BY
+        oscar_wins DESC,
+        nominee
+    LIMIT 1
+    )
+
+SELECT
+    ni.top_genre
+FROM nominee_information ni
+JOIN most_wins mw ON
+    mw.nominee = ni.name
