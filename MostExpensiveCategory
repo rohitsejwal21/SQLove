@@ -1,0 +1,21 @@
+/*
+The Most Expensive Products Per Category
+Find the most expensive products on Amazon for each product category. Output category and the price (as a number)
+*/
+
+CODE:
+
+SELECT
+    product_category,
+    product_name,
+    price
+FROM
+    (
+    SELECT
+        product_category,
+        product_name,
+        regexp_replace(price, '\$', '')::float AS price,
+        DENSE_RANK() OVER (partition by product_category ORDER BY regexp_replace(price, '\$', '')::float DESC) AS rnk
+    FROM innerwear_amazon_com
+    ) a
+WHERE rnk = 1
