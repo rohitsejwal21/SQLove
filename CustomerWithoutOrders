@@ -1,0 +1,18 @@
+/*
+Customers Without Orders
+Find customers who have never made an order.
+Output the first name of the customer.
+*/
+
+CODE:
+
+SELECT
+    first_name
+FROM customers
+WHERE id NOT IN 
+    (
+    SELECT 
+        DISTINCT
+        cust_id 
+    FROM orders
+    )
