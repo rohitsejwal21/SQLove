@@ -1,0 +1,24 @@
+/*
+Hour With The Highest Order Volume
+Which hour has the highest average order volume per day? Your output should have the hour which satisfies that condition, and average order volume.
+*/
+
+CODE:
+
+SELECT
+    DISTINCT
+    hour,
+    order_volume
+FROM
+    (
+    SELECT
+        DATE_PART('hour', order_timestamp_utc) AS hour,
+        TO_CHAR(order_timestamp_utc, 'YYYY-MM-DD') AS day,
+        COUNT(*) AS order_volume,
+        DENSE_RANK() OVER (ORDER BY COUNT(*) DESC) AS rnk
+    FROM postmates_orders
+    GROUP BY 
+        1,
+        2
+    ) vol
+WHERE rnk = 1
