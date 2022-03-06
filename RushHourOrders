@@ -1,0 +1,16 @@
+/*
+Avg Order Cost During Rush Hours
+Write a query that returns the average order cost per hour during hours 3 PM -6 PM (15-18) in San Jose. For calculating time period use 'Customer placed order datetime' field. Earnings value is 'Order total' field. Order output by hour.
+*/
+
+CODE:
+
+SELECT
+    DATE_PART('hour', customer_placed_order_datetime) AS hour,
+    AVG(order_total) AS avg_order_cost
+FROM doordash_delivery
+WHERE 
+    DATE_PART('hour', customer_placed_order_datetime) >= 15 AND
+    DATE_PART('hour', customer_placed_order_datetime) < 18 AND
+    delivery_region = 'San Jose'
+GROUP BY hour
