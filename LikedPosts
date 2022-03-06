@@ -1,0 +1,19 @@
+/*
+'Liked' Posts
+Find the number of posts which were reacted to with a like.
+*/
+
+CODE:
+
+SELECT
+    COUNT(*) AS n_liked_posts
+FROM 
+    (
+    SELECT
+        fp.post_id
+    FROM facebook_reactions fr
+    JOIN facebook_posts fp ON
+        fp.post_id = fr.post_id
+    WHERE reaction = 'like'
+    GROUP BY fp.post_id
+    ) posts
