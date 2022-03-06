@@ -1,0 +1,16 @@
+/*
+Find the number of customers without an order
+*/
+
+CODE:
+
+SELECT
+    COUNT(id) AS customers_without_orders
+FROM customers
+WHERE id NOT IN 
+    (
+    SELECT 
+        DISTINCT
+        cust_id 
+    FROM orders
+    ) 
