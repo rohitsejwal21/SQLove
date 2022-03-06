@@ -1,0 +1,34 @@
+/*
+Recommendation System
+You are given the list of Meta/Facebook friends and the list of Meta/Facebook pages that users follow. Your task is to create a new recommendation system for Meta/Facebook. For each Meta/Facebook user, find pages that this user doesn't follow but at least one of their friends does. Output the user ID and the ID of the page that should be recommended to this user.
+*/
+
+CODE:
+
+WITH user_pages AS
+    (
+    SELECT
+        DISTINCT
+        uf.user_id,
+        page_id
+    FROM users_friends uf
+    JOIN users_pages up ON
+        up.user_id = uf.user_id
+    ),
+    
+    friend_pages AS
+    (
+    SELECT
+        DISTINCT
+        friend.user_id,
+        page_id
+    FROM users_friends friend
+    JOIN users_pages page ON
+        page.user_id = friend.friend_id
+    )
+    
+SELECT
+    user_id,
+    page_id
+FROM friend_pages
+WHERE (user_id, page_id) NOT IN (SELECT * FROM user_pages)
