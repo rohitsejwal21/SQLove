@@ -1,0 +1,25 @@
+/*
+Business Inspection Scores
+Find the average inspection score for every available inspection across all businesses. You can include all the inspection scores from businesses with multiple inspections.
+Business types are 'Restaurant', 'Cafe', 'Taqueria', 'Kitchen', 'Garden', 'School' and 'Other'.
+Output the average inspection scores by business type and inspection type combination.
+*/
+
+CODE:
+
+SELECT
+    inspection_type,
+    AVG(inspection_score) AS avg_score,
+    CASE
+        WHEN business_name ILIKE '%School%' THEN 'School'
+        WHEN business_name ILIKE '%Restaurant%' THEN 'Restaurant'
+        WHEN business_name ILIKE '%Cafe%' THEN 'Cafe'
+        WHEN business_name ILIKE '%Kitchen%' THEN 'Kitchen'
+        WHEN business_name ILIKE '%Taqueria%' THEN 'Taqueria'
+        WHEN business_name ILIKE '%Garden%' THEN 'Garden'
+        ELSE 'Other'
+    END AS business_type
+FROM sf_restaurant_health_violations
+GROUP BY 
+    business_type, 
+    inspection_type
