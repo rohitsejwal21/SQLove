@@ -1,0 +1,16 @@
+/*
+Find the total number of available beds per hosts' nationality.
+Output the nationality along with the corresponding total number of available beds.
+Sort records by the total available beds in descending order.
+*/
+
+CODE:
+
+SELECT
+    nationality,
+    SUM(n_beds) AS total_beds
+FROM airbnb_apartments ap
+JOIN airbnb_hosts host ON
+    host.host_id = ap.host_id
+GROUP BY nationality
+ORDER BY total_beds DESC
