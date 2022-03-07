@@ -1,0 +1,18 @@
+/*
+User Exile
+Find the number of relationships that user 1 has been excluded from.
+*/
+
+CODE:
+
+SELECT
+    SUM(
+    CASE
+        WHEN 
+            user1 <> 1 AND
+            user2 <> 1
+            THEN 1
+        ELSE 0
+    END
+    ) AS n_excluded
+FROM facebook_friends
