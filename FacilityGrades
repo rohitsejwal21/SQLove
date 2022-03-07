@@ -1,0 +1,20 @@
+/*
+Owners With 3 Grades
+Find the owners who have at least one facility with all 3 grades.
+*/
+
+CODE:
+
+SELECT
+    DISTINCT
+    owner_name
+FROM la_restaurant_health_inspections
+WHERE facility_name IN
+    (
+    SELECT
+        facility_name
+    FROM la_restaurant_health_inspections
+    GROUP BY facility_name
+    HAVING 
+        COUNT(DISTINCT grade) = 3
+    )
