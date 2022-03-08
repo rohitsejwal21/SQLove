@@ -1,0 +1,19 @@
+/*
+Homework Results
+Given the homework results of a group of students, calculate the average grade and the completion rate of each student. 
+A homework is considered not completed if no grade has been assigned. 
+Output first name of a student, their average grade, and completion rate in percentages. 
+Note that it's possible for several students to have the same first name but their results should still be shown separately.
+*/
+
+CODE:
+
+SELECT
+    --hw.student_id,
+    st.student_firstname,
+    COUNT(grade) / COUNT(homework_id)::float * 100 AS completion_rate,
+    AVG(grade) AS avg_grades
+FROM allstate_homework hw
+JOIN allstate_students st ON
+    st.student_id = hw.student_id
+GROUP BY hw.student_id, st.student_firstname
