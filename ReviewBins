@@ -1,0 +1,33 @@
+/*
+Reviews Bins on Reviews Number
+To better understand the effect of the review count on the price, categorize the number of reviews into the following groups along with the price.
+    0 reviews: NO
+    1 to 5 reviews: FEW
+    6 to 15 reviews: SOME
+    16 to 40 reviews: MANY
+    more than 40 reviews: A LOT
+*/
+
+CODE:
+
+SELECT
+    CASE
+        WHEN number_of_reviews = 0 THEN 'NO'
+        WHEN 
+            number_of_reviews >= 1 AND
+            number_of_reviews <= 5
+            THEN 'FEW'
+        WHEN 
+            number_of_reviews >= 6 AND
+            number_of_reviews <= 15
+            THEN 'SOME'
+        WHEN 
+            number_of_reviews >= 16 AND
+            number_of_reviews <= 40
+            THEN 'MANY'
+        WHEN 
+            number_of_reviews > 40
+            THEN 'A LOT'
+    END AS review_category,
+    price
+FROM airbnb_search_details
