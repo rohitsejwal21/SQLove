@@ -1,0 +1,22 @@
+/*
+Super Managers
+Find managers with at least 7 direct reporting employees.
+Output first names of managers.
+*/
+
+CODE:
+
+SELECT
+    first_name AS manager_name
+FROM employee AS e1
+JOIN
+    (
+    SELECT
+        manager_id,
+        COUNT(id) AS n_emp
+    FROM employee
+    GROUP BY manager_id
+    ) e2 ON
+        e2.manager_id = e1.id
+WHERE
+    n_emp >= 7 
