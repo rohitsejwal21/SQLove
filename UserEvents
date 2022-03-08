@@ -1,0 +1,17 @@
+/*
+Number Of User's Events
+Find the total number of events a user has triggered and the average number of days between the event date and date of when the user activated.
+Your output should include the user_id, event name, the number of events , and the average date between the event dates and the user's activated date.
+*/
+
+CODE:
+
+SELECT
+    pe.user_id,
+    event_name,
+    AVG(TO_CHAR(occurred_at, 'YYYY-MM-DD')::date - TO_CHAR(activated_at, 'YYYY-MM-DD')::date) AS avg_days,
+    COUNT(*) AS n_events
+FROM playbook_events pe
+JOIN playbook_users pu ON
+    pu.user_id = pe.user_id
+GROUP BY pe.user_id, event_name
