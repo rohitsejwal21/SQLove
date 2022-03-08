@@ -1,0 +1,26 @@
+/*
+Number of Conversations
+Count the total number of distinct conversations on WhatsApp. 
+Two users share a conversation if they exchanged at least 1 message. 
+Multiple messages between the same pair of users are considered a single conversation.
+*/
+
+CODE:
+
+WITH user_msgs AS
+    (
+    SELECT
+        message_sender_id AS user1,
+        message_receiver_id AS user2
+    FROM whatsapp_messages
+    UNION
+    SELECT
+        message_receiver_id AS user1,
+        message_sender_id AS user2
+    FROM whatsapp_messages
+    )
+
+SELECT 
+    COUNT(*)
+FROM user_msgs
+WHERE user1 < user2
