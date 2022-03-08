@@ -1,0 +1,20 @@
+/*
+Businesses Open On Sunday
+Find the number of businesses that are open on Sundays. 
+Output the slot of operating hours along with the corresponding number of businesses open during those time slots. 
+Order records by total number of businesses opened during those hours in descending order.
+*/
+
+CODE:
+
+SELECT
+    sunday,
+    COUNT(*) AS n_business
+FROM yelp_business_hours yh
+JOIN yelp_business yb ON
+    yb.business_id = yh.business_id
+WHERE 
+    sunday IS NOT NULL AND
+    is_open = 1
+GROUP BY 1
+ORDER BY 2 DESC
