@@ -1,0 +1,12 @@
+/*
+Duplicate Orders
+Find customers who appear in the orders table more than three times.
+*/
+
+CODE:
+
+SELECT
+    cust_id
+FROM orders
+GROUP BY cust_id
+HAVING COUNT(*) > 3
