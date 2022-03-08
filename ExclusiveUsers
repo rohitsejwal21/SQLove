@@ -1,0 +1,21 @@
+/*
+Users Exclusive Per Client
+Write a query that returns a number of users who are exclusive to only one client. 
+Output the client_id and number of exclusive users.
+*/
+
+CODE:
+
+SELECT
+    client_id,
+    COUNT(DISTINCT user_id) AS n_users
+FROM fact_events
+WHERE user_id IN
+    (
+    SELECT
+        user_id
+    FROM fact_events
+    GROUP BY user_id
+    HAVING COUNT(DISTINCT client_id) = 1
+    )
+GROUP BY client_id
