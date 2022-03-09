@@ -1,0 +1,18 @@
+/*
+Number of Speakers By Language
+Find the number of speakers of each language by country. 
+Output the country, language, and the corresponding number of speakers. 
+Output the result based on the country in ascending order.
+*/
+
+CODE:
+
+SELECT
+    location,
+    language,
+    COUNT(DISTINCT pu.user_id) AS n_speakers
+FROM playbook_events pe
+JOIN playbook_users pu ON
+    pu.user_id = pe.user_id
+GROUP BY location, language
+ORDER BY location
