@@ -1,0 +1,34 @@
+/*
+Find all provinces which produced more wines in 'winemag_p1' than they did in 'winemag_p2'
+Output the province and the corresponding wine count.
+Order records by the wine count in descending order.
+*/
+
+CODE:
+
+WITH p1_wine AS
+    (
+    SELECT
+        province,
+        COUNT(DISTINCT id) AS n_winers
+    FROM winemag_p1
+    GROUP BY province
+    ),
+    
+    p2_wine AS
+    (
+    SELECT
+        province,
+        COUNT(DISTINCT id) AS n_winers
+    FROM winemag_p2
+    GROUP BY province
+    )
+    
+SELECT
+    p1.province,
+    p1.n_winers
+FROM p1_wine p1
+JOIN p2_wine p2 ON
+    p2.province = p1.province AND
+    p2.n_winers < p1.n_winers
+ORDER BY p1.n_winers DESC
