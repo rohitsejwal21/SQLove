@@ -1,0 +1,38 @@
+/*
+Find the number of Bodegas outside of Spain that produce wines with the blackberry taste
+Find the number of Bodegas (wineries with "*bodega*" pattern inside the name) outside of Spain that produce wines with the blackberry taste (description contains blackberry string). Group the count by country and region.
+Output the country, region along with the number of bodegas.
+Order records by the number of bodegas in descending order.
+*/
+
+CODE:
+
+WITH region_winery AS
+(
+SELECT
+    country,
+    description,
+    region_1 AS region, 
+    winery
+FROM winemag_p1
+UNION ALL
+SELECT
+    country,
+    description,
+    region_2 AS region, 
+    winery
+FROM winemag_p1
+WHERE region_1 <> region_2
+)
+
+SELECT
+    country,
+    region,
+    COUNT(DISTINCT winery) AS n_bodega
+FROM region_winery
+WHERE 
+    country <> 'Spain' AND
+    description ILIKE '%blackberry%' AND
+    winery ILIKE '%bodega%'
+GROUP BY country, region
+ORDER BY 3 DESC
