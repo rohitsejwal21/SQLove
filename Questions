@@ -1,0 +1,13 @@
+/*
+Questions in Second Quarter
+How many searches were there in the second quarter of 2021?
+*/
+
+CODE:
+
+SELECT
+    COUNT(DISTINCT search_id) AS n_questions
+FROM fb_searches
+WHERE 
+    DATE_PART('quarter', date) = 2 AND
+    DATE_PART('year', date) = 2021
