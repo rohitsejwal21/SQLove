@@ -1,0 +1,25 @@
+/*
+Share of Loan Balance
+Write a query that returns the rate_type, 
+loan_id and balance of each loan type, 
+and a column that shows with what percentage the loan's balance contributes to the total balance among the loans of the same rate type.
+*/
+
+CODE:
+
+SELECT
+    s1.rate_type,
+    loan_id,
+    balance,
+    balance / total_balance AS balance_contribution
+FROM submissions s1
+JOIN
+    (
+    SELECT
+        rate_type,
+        SUM(balance) AS total_balance
+    FROM submissions
+    GROUP BY rate_type
+    ) s2
+    ON
+    s2.rate_type = s1.rate_type
