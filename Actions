@@ -1,0 +1,11 @@
+/*
+Find all actions which occurred more than once in the weblog.
+*/
+
+CODE:
+
+SELECT
+    action
+FROM facebook_web_log
+GROUP BY action
+HAVING COUNT(*) > 1
