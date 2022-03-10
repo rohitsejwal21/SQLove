@@ -1,0 +1,18 @@
+/*
+Reviews of Hotel Arena
+Find the number of reviews for each review score earned by 'Hotel Arena'. 
+Output the hotel name (which should be 'Hotel Arena'), review score along with the corresponding number of reviews with that score for the specified hotel. 
+Order records by the reviewer score in ascending order.
+*/
+
+CODE:
+
+SELECT 
+    hotel_name,
+    reviewer_score,
+    COUNT(*) AS n_count
+FROM hotel_reviews
+WHERE hotel_name = 'Hotel Arena'
+GROUP BY 
+    hotel_name,
+    reviewer_score
