@@ -1,0 +1,14 @@
+/*
+Low Fat and Recyclable
+What percentage of all products are both low fat and recyclable?
+*/
+
+CODE:
+
+SELECT 
+    SUM(CASE
+           WHEN is_low_fat = 'Y'
+                AND is_recyclable = 'Y' THEN 1
+           ELSE 0
+       END) / COUNT(*)::float * 100.0 as percentage
+FROM facebook_products
