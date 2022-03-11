@@ -1,0 +1,24 @@
+/*
+City with Most Customers
+For each city, find the number of rides in August 2021 that were not paid for using promotional codes. 
+Output the city or cities where this number was the highest.
+*/
+
+CODE:
+
+SELECT
+    city
+FROM
+    (
+    SELECT
+        city,
+        RANK() OVER (ORDER BY COUNT(*) DESC) AS rides_rank
+    FROM lyft_orders orders
+    JOIN lyft_payments payments ON
+        payments.order_id = orders.order_id
+    WHERE
+        promo_code = 'FALSE' AND
+        TO_CHAR(order_date, 'YYYY-MM') = '2021-08'
+    GROUP BY city
+    ) rides
+WHERE rides_rank = 1
