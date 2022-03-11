@@ -1,0 +1,19 @@
+/*
+Advertising Channel Effectiveness
+Find the average effectiveness of each advertising channel in the period from 2017 to 2018 (both included). 
+The effectiveness is calculated as the ratio of total money spent to total customers aquired. 
+Output the advertising channel along with corresponding average effectiveness. 
+Sort records by the average effectiveness in ascending order.
+*/
+
+CODE:
+
+SELECT
+    advertising_channel,
+    SUM(money_spent) / SUM(customers_acquired) AS effectiveness
+FROM uber_advertising
+WHERE 
+    year = 2017 OR
+    year = 2018
+GROUP BY advertising_channel
+ORDER BY 2
