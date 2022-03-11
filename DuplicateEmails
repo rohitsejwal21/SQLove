@@ -7,12 +7,6 @@ CODE:
 
 SELECT
     email
-FROM
-    (
-    SELECT
-        email,
-        COUNT(*) AS n_count
-    FROM employee
-    GROUP BY email
-    ) emails
-WHERE n_count > 1
+FROM employee
+GROUP BY email
+HAVING COUNT(*) > 1
