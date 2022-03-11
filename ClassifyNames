@@ -1,0 +1,19 @@
+/*
+Classifying Owner Names
+Classify owner names as LLC, INC and OTHER using the below classification.
+    If owner name contains 'LLC' or 'LL', then classify them as 'LLC'.
+    If owner name contains 'INC', then classify them as 'INC'.
+    Classify others as 'OTHER'.
+*/
+
+CODE:
+
+SELECT
+    DISTINCT
+    owner_name,
+    CASE
+        WHEN owner_name ILIKE '%LL%' THEN 'LLC'
+        WHEN owner_name ILIKE '%INC%' THEN 'INC'
+        ELSE 'OTHER'
+    END AS owner_classification
+FROM los_angeles_restaurant_health_inspections
