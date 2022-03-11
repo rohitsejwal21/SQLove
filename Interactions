@@ -1,0 +1,15 @@
+/*
+Find the total number of interactions on days 0 and 2.
+Output the result alongside the day.
+*/
+
+CODE:
+
+SELECT
+    day,
+    COUNT(*) AS n_interactions
+FROM facebook_user_interactions
+WHERE
+    day = 0 OR
+    day = 2
+GROUP BY day
