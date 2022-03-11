@@ -1,0 +1,16 @@
+/*
+Customers Report Summary
+Summarize the number of customers and transactions for each month in 2017, filtering out transactions that were less than $5.
+*/
+
+CODE:
+
+SELECT
+    TO_CHAR(transaction_date, 'MM') AS month,
+    COUNT(DISTINCT customer_id) AS n_customers,
+    COUNT(DISTINCT transaction_id) AS n_transactions
+FROM wfm_transactions
+WHERE 
+    EXTRACT(year FROM transaction_date) = 2017 AND
+    sales >= 5
+GROUP BY month
