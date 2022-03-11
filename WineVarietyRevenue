@@ -1,0 +1,34 @@
+/*
+Wine Variety Revenues
+Find the total revenue made by each region from each variety of wine in that region. 
+Output the region, variety, and total revenue.
+Take into calculation both region_1 and region_2 but be careful for cases where region_1 == region_2. 
+The revenue shouldn't be counted twice for cases like this.
+*/
+
+CODE:
+
+SELECT
+    region,
+    variety,
+    SUM(price) AS total_revenue
+FROM 
+    (
+    SELECT
+        region_1 AS region,
+        variety,
+        price
+    FROM winemag_p1
+    UNION
+    SELECT
+        region_2 AS region,
+        variety,
+        price
+    FROM winemag_p1
+    ) regions
+WHERE 
+    region IS NOT NULL AND
+    price IS NOT NULL
+GROUP BY 
+    region,
+    variety
