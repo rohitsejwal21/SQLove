@@ -1,0 +1,22 @@
+/*
+MacBook Pro Events
+Find how many events happened on MacBook-Pro per company in Argentina from users that do not speak Spanish.
+Output the company id, language of users, and the number of events performed by users.
+*/
+
+CODE:
+
+SELECT
+    company_id,
+    language,
+    COUNT(*) AS n_events
+FROM playbook_events pe
+JOIN playbook_users pu ON
+    pu.user_id = pe.user_id
+WHERE 
+    location = 'Argentina' AND
+    language <> 'spanish' AND
+    device = 'macbook pro'
+GROUP BY 
+    company_id, 
+    language
