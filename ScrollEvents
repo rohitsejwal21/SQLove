@@ -1,0 +1,12 @@
+/*
+User Scroll Up Events
+Find all users that have performed at least one scroll_up event.
+*/
+
+CODE:
+
+SELECT
+    DISTINCT
+    user_id
+FROM facebook_web_log
+WHERE action = 'scroll_up'
