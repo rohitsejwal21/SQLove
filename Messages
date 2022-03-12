@@ -1,0 +1,14 @@
+/*
+Find all messages which have references to either user 2 or 3
+*/
+
+CODE:
+
+SELECT 
+    *
+FROM facebook_messages_sent
+WHERE 
+    text ILIKE '%User 3' OR
+    text ILIKE '%User 3 %' OR 
+    text ILIKE '%User 2' OR 
+    text ILIKE '%User 2 %'
