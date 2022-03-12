@@ -1,0 +1,12 @@
+/*
+Find the search details for villas and houses with wireless internet access
+*/
+
+CODE:
+
+SELECT
+    *
+FROM airbnb_search_details
+WHERE
+    amenities ILIKE '%Wireless Internet%' AND
+    property_type IN ('House', 'Villa')
