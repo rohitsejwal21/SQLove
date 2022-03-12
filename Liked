@@ -1,0 +1,11 @@
+/*
+Find all users who liked one or more posts
+*/
+
+CODE:
+
+SELECT
+    DISTINCT 
+    friend
+FROM facebook_reactions
+WHERE reaction = 'like'
