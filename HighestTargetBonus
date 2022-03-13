@@ -1,0 +1,22 @@
+/*
+Highest Target
+Find the employee who has achieved the highest target.
+Output the employee's first name along with the achieved target and the bonus.
+*/
+
+CODE:
+
+SELECT
+    first_name,
+    target,
+    bonus
+FROM
+    (
+    SELECT
+        first_name,
+        target,
+        bonus,
+        RANK() OVER (ORDER BY target DESC) AS target_rank
+    FROM employee
+    ) ranking
+WHERE target_rank = 1
