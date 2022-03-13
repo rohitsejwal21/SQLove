@@ -1,0 +1,14 @@
+/*
+Average Number of Requests
+What was the average number of friend requests sent by users in the second week of December 2021?
+Hint: the second week of December 2021 is the 49th week of the year.
+*/
+
+CODE:
+
+SELECT
+    COUNT(sender_id) / COUNT(DISTINCT sender_id)::float AS avg_requests
+FROM fb_requests
+WHERE 
+    DATE_PART('week', sent_date) = 49 AND
+    DATE_PART('year', sent_date) = 2021
