@@ -1,0 +1,25 @@
+/*
+Employed at Google
+Find IDs of LinkedIn users who were employed at Google on November 1st, 2021. 
+Do not consider users who started or ended their employment at Google on that day but do include users who changed their position within Google on that day.
+*/
+
+CODE:
+
+SELECT
+    l1.user_id
+FROM linkedin_users l1
+JOIN linkedin_users l2 ON
+    l2.user_id = l1.user_id
+WHERE 
+    l1.employer = 'Google' AND
+    (
+        (
+        l1.start_date < '2021-11-01' AND 
+        ( l1.end_date > '2021-11-01' OR l1.end_date IS NULL )
+        ) OR
+        (
+        l1.end_date = '2021-11-01' AND
+        l2.start_date = '2021-11-01'
+        )
+    )
