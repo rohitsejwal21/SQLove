@@ -1,0 +1,43 @@
+/*
+Call Declines
+Which company had the biggest month decline in users placing a call from March to April 2020?
+Return the company_id and calls variance for the company with the highest decline.
+*/
+
+CODE:
+
+WITH call_diff_ranking AS
+(
+SELECT
+    company_id,
+    SUM(CASE WHEN TO_CHAR(date, 'MM') = '03' THEN 1 
+            ELSE 0
+        END) - 
+    SUM(CASE 
+            WHEN TO_CHAR(date, 'MM') = '04' THEN 1 
+        ELSE 0 END) AS variance,
+    RANK() OVER (ORDER BY 
+                SUM(CASE WHEN TO_CHAR(date, 'MM') = '03' THEN 1 
+                        ELSE 0
+                    END) - 
+                SUM(CASE 
+                        WHEN TO_CHAR(date, 'MM') = '04' THEN 1 
+                    ELSE 0 END) 
+                DESC) AS calls_ranking
+FROM rc_calls c
+JOIN rc_users u ON
+    u.user_id = c.user_id
+WHERE 
+    TO_CHAR(date, 'MM') = '03' OR
+    TO_CHAR(date, 'MM') = '04'
+GROUP BY 
+    1
+ORDER BY 
+    1
+)
+
+SELECT
+    company_id,
+    variance
+FROM call_diff_ranking
+WHERE calls_ranking = 1
