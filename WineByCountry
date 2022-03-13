@@ -1,0 +1,20 @@
+/*
+Find the number of wines with and without designations per country
+Output the country along with the total without designations, total with designations, and the final total of both.
+*/
+
+CODE:
+
+SELECT
+    country,
+    COUNT(
+        CASE
+            WHEN designation IS NOT NULL THEN 1
+        END) AS with_designation,
+    COUNT(
+        CASE
+            WHEN designation IS NULL THEN 1
+        END) AS without_designation,
+    COUNT(*) AS total_designation
+FROM winemag_p2
+GROUP BY country
