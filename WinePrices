@@ -1,0 +1,27 @@
+/*
+Price Of Wines In Each Country
+Find the minimum, average, and maximum price of all wines per country. 
+Assume all wines listed across both datasets are unique. 
+Output the country name along with the corresponding minimum, maximum, and average prices.
+*/
+
+CODE:
+
+SELECT
+    country,
+    MIN(price) as minimum_price,
+    MAX(price) as maximum_price,
+    AVG(price) as average_price
+FROM
+    (
+    SELECT
+        country,
+        price
+    FROM winemag_p1
+    UNION ALL
+    SELECT
+        country,
+        price
+    FROM winemag_p2
+    ) wines
+GROUP BY country
