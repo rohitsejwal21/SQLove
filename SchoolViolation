@@ -1,0 +1,24 @@
+/*
+Find the number of violations that each school had. 
+Any inspection is considered a violation if its risk category is not null.
+Output the corresponding business name along with the result.
+Order the result based on the number of violations in descending order.
+*/
+
+CODE:
+
+SELECT
+    --business_id,
+    business_name,
+    SUM(
+        CASE
+            WHEN risk_category IS NOT NULL THEN 1
+            ELSE 0
+        END) AS n_violations
+FROM sf_restaurant_health_violations
+WHERE 
+    business_name ILIKE '%School%' AND
+    risk_category IS NOT NULL
+GROUP BY 
+    --business_id,
+    business_name
