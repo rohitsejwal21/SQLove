@@ -1,0 +1,12 @@
+/*
+Departments With 5 Employees
+Find departments with at more than or equal 5 employees.
+*/
+
+CODE:
+
+SELECT
+    department
+FROM employee
+GROUP BY department
+HAVING COUNT(id) >= 5
