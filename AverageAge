@@ -1,0 +1,15 @@
+/*
+Find the average age of guests reviewed by each host
+Output the user along with the average age.
+*/
+
+CODE:
+
+SELECT
+    ar.from_user,
+    AVG(ag.age) AS average_age
+FROM airbnb_reviews ar
+JOIN airbnb_guests ag ON
+    ag.guest_id = ar.to_user
+WHERE from_type = 'host'
+GROUP BY ar.from_user
