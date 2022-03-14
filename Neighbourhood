@@ -1,0 +1,14 @@
+/*
+Find neighborhoods that have properties with a parking space and no cleaning fees
+Find all neighborhoods that have properties with a parking space and don't charge for cleaning fees. 
+*/
+
+CODE:
+
+SELECT 
+    DISTINCT 
+    neighbourhood
+FROM airbnb_search_details
+WHERE 
+    amenities ILIKE '%parking%' AND
+    cleaning_fee is FALSE
