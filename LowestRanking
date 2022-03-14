@@ -1,0 +1,29 @@
+/*
+Find the ten hotels with the lowest ratings
+Output the hotel name along with the corresponding average score.
+Sort records based on the average score in ascending order.
+*/
+
+CODE:
+
+WITH rankings AS
+    (
+    SELECT 
+        hotel_name,
+        average_score,
+        RANK() OVER (ORDER BY average_score ASC) AS rnk
+    FROM 
+        (
+        SELECT
+            DISTINCT
+            hotel_name,
+            average_score
+        FROM
+        hotel_reviews
+        ) dist
+    )
+   
+SELECT hotel_name,
+       average_score
+FROM rankings
+WHERE rnk <= 10
