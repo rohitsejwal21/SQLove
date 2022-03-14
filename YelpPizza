@@ -1,0 +1,10 @@
+/*
+Find the number of Yelp businesses that sell pizza
+*/
+
+CODE:
+
+SELECT 
+    count(*) 
+FROM yelp_business 
+WHERE categories like '%Pizza%'
