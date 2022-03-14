@@ -1,0 +1,11 @@
+/*
+Records With '?'
+Find records with the value '?' in the `stars` column.
+*/
+
+CODE:
+
+SELECT
+    *
+FROM yelp_reviews
+WHERE stars = '?'
