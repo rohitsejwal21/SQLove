@@ -1,0 +1,18 @@
+/*
+Find the date with the highest opening stock price
+Find the date when Apple's opening stock price reached its maximum
+*/
+
+CODE:
+
+SELECT
+    p1.date AS highest_open_date
+FROM aapl_historical_stock_price p1
+JOIN 
+    (
+    SELECT
+        MAX(open) AS max_open
+    FROM aapl_historical_stock_price
+    ) p2
+ON
+    p2.max_open = p1.open
