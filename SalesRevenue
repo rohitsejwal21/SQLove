@@ -1,0 +1,13 @@
+/*
+Calculate Samantha's and Lisa's total sales revenue
+What is the total sales revenue of Samantha and Lisa?
+*/
+
+CODE:
+
+SELECT
+    SUM(sales_revenue) AS total_revenue
+FROM sales_performance
+WHERE 
+    salesperson = 'Samantha' OR 
+    salesperson = 'Lisa'
