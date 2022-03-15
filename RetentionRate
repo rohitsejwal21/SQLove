@@ -1,0 +1,48 @@
+/*
+First Day Retention Rate
+Calculate the first-day retention rate of a group of video game players. 
+The first-day retention occurs when a player logs in on a day following their first-ever log-in.
+Return the proportion of players who meet this definition divided by the total number of players. 
+*/
+
+CODE:
+
+WITH login_details AS
+    (
+    SELECT
+        player_id,
+        DENSE_RANK() OVER (PARTITION BY player_id 
+        ORDER BY 
+            player_id, 
+            login_date) AS login_rank,
+        LAG(login_date, 1) OVER (PARTITION BY player_id
+        ORDER BY 
+            player_id, 
+            login_date) AS prev_login,
+        login_date - 1 AS check_login_date
+    FROM players_logins
+    ORDER BY 
+        player_id, 
+        login_date
+    ),
+    
+    retained_players AS
+    (
+    SELECT
+        COUNT(DISTINCT player_id) AS n_retained
+    FROM login_details
+    WHERE 
+        login_rank = 2 AND
+        prev_login = check_login_date
+    ),
+    
+    total_players AS
+    (
+    SELECT
+        COUNT(DISTINCT player_id) AS total_players
+    FROM players_logins
+    )
+
+SELECT
+    n_retained / total_players::float AS retention_rate
+FROM retained_players, total_players
