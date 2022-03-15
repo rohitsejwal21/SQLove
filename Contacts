@@ -1,0 +1,13 @@
+/*
+List first 5 entries of a joined contacts and searches tables
+Find the first 5 rows by joining search details and contacts datasets.
+*/
+
+CODE:
+
+SELECT 
+    *
+FROM airbnb_searches search 
+JOIN airbnb_contacts contact ON
+    search.id_user = contact.id_guest
+LIMIT 5
