@@ -1,0 +1,20 @@
+/*
+Find all records with words that start with the letter 'g'
+Output words1 and words2 if any of them satisfies the condition.
+*/
+
+CODE:
+
+SELECT
+    words1,
+    words2
+FROM google_word_lists
+WHERE
+    (
+    words1 ILIKE 'g%' OR 
+    words1 ILIKE '%,g%'
+    ) OR 
+    (
+    words2 ILIKE 'g%' OR 
+    words2 ILIKE '%,g%'
+    )
