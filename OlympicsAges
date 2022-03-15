@@ -1,0 +1,33 @@
+/*
+Find Olympics games that the youngest and the oldest athletes participated in the history of Olympics
+Output all the details corresponding to each record.
+*/
+
+CODE:
+
+WITH game_ages AS
+    (
+    SELECT
+        games,
+        MAX(age) AS maximum_age,
+        MIN(age) AS minimum_age
+    FROM olympics_athletes_events
+    GROUP BY games
+    )
+
+SELECT
+    *
+FROM olympics_athletes_events
+WHERE 
+    age = 
+    (
+    SELECT
+        MIN(minimum_age)
+    FROM game_ages
+    ) OR
+    age = 
+    (
+    SELECT
+        MAX(maximum_age)
+    FROM game_ages
+    )
