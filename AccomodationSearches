@@ -1,0 +1,10 @@
+/*
+Find all searches for accommodations with an equal number of bedrooms bathrooms
+*/
+
+CODE:
+
+SELECT 
+    *
+FROM airbnb_search_details
+WHERE bedrooms = bathrooms
