@@ -1,0 +1,11 @@
+/*
+Find distinct searches for Los Angeles neighborhoods
+*/
+
+CODE:
+
+SELECT 
+    DISTINCT 
+    neighbourhood
+FROM airbnb_search_details
+WHERE city = 'LA'
