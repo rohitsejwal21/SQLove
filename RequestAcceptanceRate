@@ -1,0 +1,14 @@
+/*
+Requests Acceptance Rate
+Find the acceptance rate of requests which is defined as the ratio of accepted contacts vs all contacts. 
+Multiply the ratio by 100 to get the rate.
+*/
+
+CODE:
+
+SELECT
+    100.0 * SUM(CASE 
+                WHEN ts_accepted_at IS NOT NULL THEN 1
+                ELSE 0
+            END) / COUNT(*) AS acceptance_rate
+FROM airbnb_contacts
