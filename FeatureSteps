@@ -1,0 +1,12 @@
+/*
+Find the maximum step reached for every feature
+Output the feature id along with its maximum step.
+*/
+
+CODE:
+
+SELECT
+    feature_id,
+    MAX(step_reached) AS max_steps
+FROM facebook_product_features_realizations
+GROUP BY feature_id
