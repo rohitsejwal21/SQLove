@@ -1,0 +1,14 @@
+/*
+Companies With Chinese Speakers
+Find companies that have at least 2 Chinese speaking users.
+*/
+
+CODE:
+
+SELECT
+    company_id
+FROM playbook_users
+WHERE language = 'chinese'
+GROUP BY company_id
+HAVING COUNT(*) >= 2
+ORDER BY company_id
