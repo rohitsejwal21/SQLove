@@ -1,0 +1,20 @@
+/*
+Find the top ten hotels with the highest ratings
+Output the hotel name along with the corresponding average score.
+Sort records based on the average score in descending order.
+*/
+
+CODE:
+
+SELECT 
+    hotel_name,
+    average_score
+FROM 
+    (
+    SELECT 
+        hotel_name,
+        average_score,
+        RANK() OVER (ORDER BY average_score DESC) rnk
+    FROM hotel_reviews
+    ) ranking
+WHERE rnk <= 10
