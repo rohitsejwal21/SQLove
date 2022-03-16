@@ -1,0 +1,10 @@
+/*
+Find all neighborhoods present in this dataset
+*/
+
+CODE:
+
+SELECT 
+    DISTINCT
+    neighbourhood
+FROM airbnb_search_details
