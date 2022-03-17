@@ -1,0 +1,12 @@
+/*
+Find the five highest salaries
+*/
+
+CODE:
+
+SELECT 
+    DISTINCT
+    salary 
+FROM worker
+ORDER BY salary DESC
+limit 5
