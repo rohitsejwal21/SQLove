@@ -1,0 +1,19 @@
+/*
+Highest Salary
+Find the worker who earns the highest salary. 
+Output the worker's first name along with the salary.
+*/
+
+CODE:
+
+SELECT 
+    first_name,
+    salary 
+FROM worker
+WHERE 
+    salary = 
+    (
+    SELECT 
+        MAX(salary)
+    FROM worker
+    )
