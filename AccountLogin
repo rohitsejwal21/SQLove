@@ -1,0 +1,11 @@
+/*
+Count the number of accounts used for logins in 2016
+How many accounts have performed a login in the year 2016?
+*/
+
+CODE:
+
+SELECT 
+    COUNT(DISTINCT account_id) AS n_logins
+FROM product_logins
+WHERE login_date BETWEEN '2016-01-01' AND '2016-12-31'
