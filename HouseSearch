@@ -1,0 +1,14 @@
+/*
+Find the total number of searches for houses Westlake neighborhood with a TV
+Find the total number of searches for houses in Westlake neighborhood with a TV among the amenities.
+*/
+
+CODE:
+
+SELECT 
+    COUNT(*) AS n_searches
+FROM airbnb_search_details
+WHERE 
+    neighbourhood = 'Westlake' AND 
+    property_type = 'House'    AND 
+    amenities LIKE '%TV%'
