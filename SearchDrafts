@@ -1,0 +1,12 @@
+/*
+Find drafts which contains the word 'optimism'
+*/
+
+CODE:
+
+SELECT
+    *
+FROM google_file_store
+WHERE
+    filename ILIKE 'draft%' AND
+    contents ILIKE '%optimism%'
