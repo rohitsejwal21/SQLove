@@ -1,0 +1,12 @@
+/*
+Count users that speak English, German, French or Spanish
+How many users speak English, German, French or Spanish?
+Note: Users who speak more than one language are counted only once.
+*/
+
+CODE:
+
+SELECT
+    COUNT(DISTINCT user_id) AS n_wanted_speakers
+FROM playbook_users
+WHERE language IN ('english', 'german', 'french', 'spanish')
