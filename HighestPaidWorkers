@@ -1,0 +1,22 @@
+/*
+Find the top 5 highest paid workers
+Output all information about workers whose salaries are among top 5 paid ones.
+*/
+
+CODE:
+
+SELECT 
+    worker_id, 
+    first_name, 
+    last_name, 
+    salary, 
+    joining_date, 
+    department
+FROM
+    (
+    SELECT 
+        *,
+        RANK() over(ORDER BY salary DESC) AS rnk
+    FROM worker
+    ) ranking
+WHERE rnk <= 5
