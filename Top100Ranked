@@ -1,0 +1,11 @@
+/*
+Top 100 Ranked Songs
+Find the total number of streams for the top 100 ranked songs.
+*/
+
+CODE:
+
+SELECT 
+    SUM(streams) AS n_streams
+FROM spotify_worldwide_daily_song_ranking
+WHERE position <= 100
