@@ -1,0 +1,13 @@
+/*
+Find the advertising channel where Uber spent more than 100k USD in 2019
+*/
+
+CODE:
+
+SELECT
+    DISTINCT
+    advertising_channel
+FROM uber_advertising
+WHERE
+    money_spent >= 100000 AND
+    year = 2019
