@@ -1,0 +1,10 @@
+/*
+Find all workers whose first name contains 6 letters and also ends with the letter 'h'
+*/
+
+CODE:
+
+SELECT 
+    * 
+FROM worker
+WHERE first_name LIKE '_____h'
