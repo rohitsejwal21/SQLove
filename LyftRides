@@ -1,0 +1,12 @@
+/*
+Find all Lyft rides which happened on rainy days before noon
+*/
+
+CODE:
+
+SELECT
+    *
+FROM lyft_rides
+WHERE
+    weather = 'rainy' AND 
+    hour BETWEEN 0 AND 11
