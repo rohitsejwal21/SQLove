@@ -1,0 +1,10 @@
+/*
+Find all companies with more than 10 employees
+*/
+
+CODE:
+
+SELECT
+    *
+FROM google_adwords_earnings
+WHERE n_employees > 10
