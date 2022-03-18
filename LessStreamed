@@ -1,0 +1,15 @@
+/*
+Find songs with less than 2000 streams
+Output the track name along with the corresponding streams.
+Sort records by streams in descending order.
+There is no need to group rows with same track name
+*/
+
+CODE:
+
+SELECT 
+    trackname,
+    streams
+FROM spotify_worldwide_daily_song_ranking
+WHERE streams < 2000
+ORDER BY streams desc
