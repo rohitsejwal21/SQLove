@@ -1,0 +1,16 @@
+/*
+Find the first record of the dataset without using LIMIT or ORDER BY
+*/
+
+CODE:
+
+SELECT 
+    * 
+FROM worker
+WHERE 
+    worker_id =
+    (
+    SELECT 
+        MIN(worker_id)
+    FROM worker
+    )
