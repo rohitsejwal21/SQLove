@@ -1,0 +1,12 @@
+/*
+Find the year that Uber acquired more than 2000 customers through celebrities
+*/
+
+CODE:
+
+SELECT
+    year
+FROM uber_advertising
+WHERE
+    advertising_channel = 'celebrities' AND
+    customers_acquired > 2000
