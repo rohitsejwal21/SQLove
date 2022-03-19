@@ -1,0 +1,35 @@
+/*
+Highest Paid City Employees
+Find the top 2 highest paid City employees for each job title. 
+Output the job title along with the corresponding highest and second-highest paid employees.
+*/
+
+CODE:
+
+SELECT
+    jobtitle,
+    MAX(highest_paid) AS highest_paid,
+    MAX(second_highest_paid) AS second_highest_paid
+FROM
+    (
+    SELECT
+        jobtitle,
+        CASE
+            WHEN rnk = 1 THEN employeename
+        END AS highest_paid,
+        CASE
+            WHEN rnk = 2 THEN employeename
+        END AS second_highest_paid
+    FROM
+        (
+        SELECT
+            employeename,
+            jobtitle,
+            agency,
+            totalpaybenefits,
+            ROW_NUMBER() OVER (PARTITION BY jobtitle, agency ORDER BY totalpaybenefits DESC) AS rnk
+        FROM sf_public_salaries
+        ) ranking
+    WHERE rnk <= 2
+    ) titles
+GROUP BY jobtitle
