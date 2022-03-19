@@ -1,0 +1,10 @@
+/*
+Find all search details where data is missing from the host_response_rate column.
+*/
+
+CODE:
+
+SELECT
+    *
+FROM airbnb_search_details
+WHERE host_response_rate is NULL
