@@ -1,0 +1,26 @@
+/*
+Time from 10th Runner
+In a marathon, gun time is counted from the moment of the formal start of the race while net time is counted from the moment a runner crosses a starting line. 
+Both variables are in seconds. 
+How much net time separates Chris Doe from the 10th best net time (in ascending order)? 
+Avoid gaps in the ranking calculation. 
+Output absolute net time difference.
+*/
+
+CODE:
+
+SELECT
+    ABS(m1.net_time - m2.net_time) AS net_time_difference
+FROM marathon_male m1
+JOIN
+    (
+    SELECT
+        DISTINCT
+        net_time,
+        DENSE_RANK() OVER (ORDER BY net_time) AS rnk
+    FROM marathon_male
+    ORDER BY net_time
+    ) m2
+    ON
+    m2.rnk = 10 AND
+    m1.person_name = 'Chris Doe'
