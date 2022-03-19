@@ -1,0 +1,28 @@
+/*
+Business Density Per Street
+Find the average and highest number of businesses for all the streets in the dataset. 
+Only consider streets with at least 5 businesses. 
+Assume the street is extracted by choosing the second word from the business_address column. 
+Use `business_id` as a way to count the number of unique businesses.
+*/
+
+CODE:
+
+SELECT
+    MAX(total_businesses) AS max_businesses,
+    AVG(total_businesses) AS average_businesses
+FROM
+    (
+    SELECT
+        street,
+        COUNT(DISTINCT business_id) AS total_businesses
+    FROM
+        (
+        SELECT
+            business_id,
+            LOWER(SPLIT_PART(business_address, ' ', 2)) AS street
+        FROM sf_restaurant_health_violations
+        ) streets
+    GROUP BY street
+    ) businesses
+WHERE total_businesses >= 5
