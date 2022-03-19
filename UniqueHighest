@@ -1,0 +1,18 @@
+/*
+Unique Highest Salary
+Find the highest salary among salaries that appears only once.
+*/
+
+CODE:
+
+SELECT
+    MAX(salary) AS highest_salary
+FROM
+    (
+    SELECT
+        salary,
+        COUNT(*) AS n_salaries
+    FROM employee
+    GROUP BY salary
+    ) cnt
+WHERE n_salaries = 1
