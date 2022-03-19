@@ -1,0 +1,42 @@
+/*
+Most Popular Streets
+Find the most popular street for low, moderate, and high-risk categories based on the number of incidents per each category. 
+Output the street name along with the popularity and the corresponding risk category.
+*/
+
+CODE:
+
+WITH risk_inspections AS
+    (
+    SELECT
+        risk_category,
+        street_name,
+        COUNT(*) AS n_inspections,
+        RANK() OVER (PARTITION BY risk_category ORDER BY COUNT(*) DESC) AS rnk
+    FROM
+    (
+    SELECT
+        *,
+        CASE
+            WHEN pe_description ILIKE '%LOW%' THEN 'Low Risk'
+            WHEN pe_description ILIKE '%MODERATE%' THEN 'Moderate Risk'
+            WHEN pe_description ILIKE '%HIGH%' THEN 'High Risk'
+        END AS risk_category,
+        CASE
+            WHEN LENGTH(split_part(facility_address, ' ', 2)) >= 3 THEN split_part(facility_address, ' ', 2)
+            WHEN LENGTH(split_part(facility_address, ' ', 3)) >= 3 THEN split_part(facility_address, ' ', 3)
+            ELSE split_part(facility_address, ' ', 4)
+        END AS street_name
+    FROM los_angeles_restaurant_health_inspections
+    ) a
+    GROUP BY 
+        risk_category,
+        street_name
+    )
+
+SELECT
+    street_name,
+    risk_category,
+    n_inspections
+FROM risk_inspections
+WHERE rnk = 1
