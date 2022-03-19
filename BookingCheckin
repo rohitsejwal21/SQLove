@@ -1,0 +1,16 @@
+/*
+Find the average number of days between the booking and check-in dates for AirBnB hosts. 
+Order the results based on the average number of days in descending order.
+*/
+
+CODE:
+
+SELECT
+    id_host,
+    AVG(ds_checkin - ts_booking_at::date) AS avg_days
+FROM airbnb_contacts
+WHERE 
+    ds_checkin IS NOT NULL AND
+    ts_booking_at IS NOT NULL
+GROUP BY id_host
+ORDER BY 2 DESC
