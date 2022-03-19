@@ -1,0 +1,30 @@
+/*
+Minimum Number of Platforms
+You are given a day worth of scheduled departure and arrival times of trains at one train station. 
+One platform can only accommodate one train from the beginning of the minute it's scheduled to arrive until the end of the minute it's scheduled to depart. 
+Find the minimum number of platforms necessary to accommodate the entire scheduled traffic
+*/
+
+CODE:
+
+SELECT
+    MAX(train_time) AS n_platforms
+FROM
+    (
+    SELECT
+        SUM(mark) OVER (ORDER BY time, mark DESC) AS train_time
+    FROM
+        (
+        SELECT
+            train_id,
+            arrival_time AS time,
+            1 AS mark
+        FROM train_arrivals
+        UNION ALL
+        SELECT
+            train_id,
+            departure_time AS time,
+            -1 AS mark
+        FROM train_departures 
+        ) times
+    ) platforms
