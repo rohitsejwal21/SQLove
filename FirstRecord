@@ -4,13 +4,18 @@ Find the first record of the dataset without using LIMIT or ORDER BY
 
 CODE:
 
+SELECT
+    worker_id,
+    first_name,
+    last_name,
+    salary,
+    joining_date,
+    department
+FROM
+(
 SELECT 
-    * 
+    *,
+    ROW_NUMBER() OVER () AS n_row
 FROM worker
-WHERE 
-    worker_id =
-    (
-    SELECT 
-        MIN(worker_id)
-    FROM worker
-    )
+) rows
+WHERE n_row = 1
