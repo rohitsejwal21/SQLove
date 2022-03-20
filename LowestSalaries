@@ -1,0 +1,13 @@
+/*
+Find the three lowest salaries.
+Order records based on the salary in ascending order.
+*/
+
+CODE:
+
+SELECT 
+    DISTINCT
+    salary 
+FROM worker
+ORDER BY salary ASC
+LIMIT 3
