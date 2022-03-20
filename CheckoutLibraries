@@ -1,0 +1,14 @@
+/*
+100 Total Checkouts Libraries
+Find the number of libraries that had 100 of total checkouts in February 2015.
+*/
+
+CODE:
+
+SELECT
+    COUNT(distinct home_library_definition) AS number_of_libraries
+FROM library_usage
+WHERE 
+    total_checkouts = 100 AND
+    circulation_active_month = 'February' AND
+    circulation_active_year = 2015
