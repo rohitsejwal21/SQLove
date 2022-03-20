@@ -1,0 +1,13 @@
+/*
+Find the three highest salaries.
+Order records based on the salary in descending order.
+*/
+
+CODE:
+
+SELECT 
+    DISTINCT
+    salary 
+FROM worker
+ORDER BY salary DESC
+LIMIT 3
