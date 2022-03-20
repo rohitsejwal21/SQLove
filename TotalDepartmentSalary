@@ -1,0 +1,12 @@
+/*
+Find the total salary of each department.
+Output the salary along with the corresponding department.
+*/
+
+CODE:
+
+SELECT
+    department, 
+    SUM(salary) AS total_salary
+FROM worker
+GROUP BY department
