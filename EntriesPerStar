@@ -1,0 +1,14 @@
+/*
+Find the number of entries per star.
+Output each number of stars along with the corresponding number of entries.
+Order records by stars in ascending order.
+*/
+
+CODE:
+
+SELECT 
+    stars,
+    COUNT(*) AS n_entries
+FROM yelp_reviews
+GROUP BY stars
+ORDER BY stars
