@@ -1,0 +1,11 @@
+/*
+Find the average height of a quarterback
+What is the average height of quarterbacks?
+*/
+
+CODE:
+
+SELECT 
+    AVG(heightinchestotal) AS avg_height_inches
+FROM nfl_combine
+WHERE position = 'QB'
