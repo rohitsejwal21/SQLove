@@ -1,0 +1,15 @@
+/*
+Women In The Olympics Before World War 2
+Find unique names women who participated in an Olympics before World War 2. 
+Let's consider the year 1939 as the start of WW2.
+*/
+
+CODE:
+
+SELECT
+    DISTINCT
+    name
+FROM olympics_athletes_events
+WHERE 
+    sex = 'F' AND 
+    year < 1939
