@@ -1,0 +1,15 @@
+/*
+Find Olympic Events Based On Height
+Find events of any Winter Olympics in which there were athletes of height between 180 to 210 centimeters. 
+Output unique events only.
+*/
+
+CODE:
+
+SELECT
+    DISTINCT
+    event
+FROM olympics_athletes_events
+WHERE 
+    season = 'Winter' AND 
+    height BETWEEN 180 AND 210
