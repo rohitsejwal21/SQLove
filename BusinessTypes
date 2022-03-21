@@ -1,0 +1,10 @@
+/*
+Find business types present in the dataset.  
+*/
+
+CODE:
+
+SELECT
+    DISTINCT 
+    business_type
+FROM google_adwords_earnings
