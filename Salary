@@ -1,0 +1,10 @@
+/*
+Find all workers whose salary lies between 100000 and 500000
+*/
+
+CODE:
+
+SELECT 
+    * 
+FROM worker
+WHERE salary BETWEEN 100000 AND 500000
