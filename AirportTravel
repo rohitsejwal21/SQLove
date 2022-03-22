@@ -1,0 +1,12 @@
+/*
+Find the average distance an airplane travels from each origin airport.
+Output the result along with the corresponding origin.
+*/
+
+CODE:
+
+SELECT
+    origin,
+    AVG(distance) AS avg_distance
+FROM us_flights
+GROUP BY origin
