@@ -1,0 +1,9 @@
+/*
+Find unique IATA codes
+What are the unique IATA codes for all origin airports in the dataset?
+*/
+
+SELECT 
+    DISTINCT
+    origin
+FROM us_flights
