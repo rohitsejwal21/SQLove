@@ -1,0 +1,13 @@
+/*
+Highest Market Value Per Sector
+Find the highest market value for each sector.
+Output the sector name along with the result.
+*/
+
+CODE:
+
+SELECT
+    sector,
+    MAX(marketvalue) AS max_mv
+FROM forbes_global_2010_2014
+GROUP BY sector
