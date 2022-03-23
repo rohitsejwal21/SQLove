@@ -1,0 +1,16 @@
+/*
+Find the Olympic game which had the highest number of participants that didn't earn a medal.
+Output the Olympic game name along with the corresponding number of athletes.
+Olympic game name consists of the year and the season.
+*/
+
+CODE:
+
+SELECT
+    games,
+    COUNT(distinct name) AS n_athletes
+FROM olympics_athletes_events
+WHERE medal IS NULL
+GROUP BY games
+ORDER BY n_athletes DESC
+LIMIT 1
