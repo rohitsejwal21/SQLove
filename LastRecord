@@ -1,0 +1,15 @@
+/*
+Find the last record of the dataset without using LIMIT or ORDER BY
+*/
+
+CODE:
+
+SELECT *
+FROM worker
+WHERE worker_id =
+    (
+    SELECT 
+        DISTINCT 
+        last_value(worker_id) OVER ()
+    FROM worker
+    )
