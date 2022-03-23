@@ -1,0 +1,12 @@
+/*
+Latest Login Date
+For each video game player, find the latest date when they logged in.
+*/
+
+CODE:
+
+SELECT 
+    player_id, 
+    MAX(login_date) AS latest_login 
+FROM players_logins 
+GROUP BY player_id
