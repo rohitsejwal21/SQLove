@@ -1,0 +1,12 @@
+/*
+Find all events participated by Christine Jacoba Aaftink.
+Output unique values only.
+*/
+
+CODE:
+
+SELECT
+    DISTINCT
+    event
+FROM olympics_athletes_events
+WHERE name = 'Christine Jacoba Aaftink'
