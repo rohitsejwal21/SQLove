@@ -1,0 +1,10 @@
+/*
+Find details of workers with the first name of either 'Vipul' or 'Satish'
+*/
+
+CODE:
+
+SELECT 
+    * 
+FROM worker
+WHERE first_name in ('Vipul','Satish')
