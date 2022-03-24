@@ -1,0 +1,10 @@
+/*
+Count the unique origin airports
+Find how many different origin airports exist?
+*/
+
+CODE:
+
+SELECT
+    COUNT(distinct origin) AS n_airports
+FROM us_flights
