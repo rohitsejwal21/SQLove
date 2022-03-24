@@ -1,0 +1,10 @@
+/*
+Find all workers that work in the Admin department
+*/
+
+CODE:
+
+SELECT 
+    * 
+FROM worker
+WHERE department LIKE 'Admin'
