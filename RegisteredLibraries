@@ -1,0 +1,11 @@
+/*
+Find how many people registered in libraries in the year 2016.
+Output the total patrons.
+*/
+
+CODE:
+
+SELECT 
+    COUNT(*) AS n_patrons
+FROM library_usage
+WHERE year_patron_registered = 2016
