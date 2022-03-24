@@ -1,0 +1,12 @@
+/*
+Find job titles that had 0 hours of overtime.
+Output unique job title names.
+*/
+
+CODE:
+
+SELECT
+    DISTINCT
+    jobtitle
+FROM sf_public_salaries
+WHERE overtimepay = '0.0'
