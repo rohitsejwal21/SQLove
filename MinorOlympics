@@ -1,0 +1,14 @@
+/*
+Find all minor that participated in Olympics games. 
+A player is considered as a minor if he or she is older less or equal than 18 years.
+Output the name and age of the player along with participated Olympic games (ex: 1992 Summer).
+*/
+
+CODE:
+
+SELECT
+    name,
+    age, 
+    games
+FROM olympics_athletes_events
+WHERE age <= 18
