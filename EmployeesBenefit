@@ -1,0 +1,15 @@
+/*
+Benefits Of Employees Called Patric
+Find benefits that people with the name 'Patrick' have.
+Output the employee name along with the corresponding benefits.
+*/
+
+CODE:
+
+SELECT
+    employeename, 
+    benefits
+FROM sf_public_salaries
+WHERE 
+    employeename ILIKE '%patrick%' AND 
+    benefits IS NOT NULL
