@@ -1,0 +1,11 @@
+/*
+Combine the first and last names of workers
+Combine the first and last names of workers with a space inbetween.
+*/
+
+CODE:
+
+SELECT 
+    --first_name || ' ' || last_name AS name,
+    CONCAT(first_name, ' ', last_name) AS name
+FROM worker
