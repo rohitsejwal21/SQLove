@@ -1,0 +1,13 @@
+/*
+'METROPOLITAN TRANSIT AUTHORITY' Employees
+Find all employees with a job title that contains 'METROPOLITAN TRANSIT AUTHORITY' and 
+output the employee's name along with the corresponding total pay with benefits.
+*/
+
+CODE:
+
+SELECT
+    employeename,
+    totalpaybenefits
+FROM sf_public_salaries
+WHERE jobtitle ILIKE '%METROPOLITAN TRANSIT AUTHORITY%'
