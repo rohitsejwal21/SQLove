@@ -1,0 +1,9 @@
+/*
+Replace the letter 'a' with 'A' in the first name
+*/
+
+CODE:
+
+SELECT
+    REPLACE(first_name, 'a' , 'A') AS first_name
+FROM worker
