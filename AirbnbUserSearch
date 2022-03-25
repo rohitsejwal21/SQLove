@@ -1,0 +1,10 @@
+/*
+Find the number of users that have done a search
+How many unique users have performed a search?
+*/
+
+CODE:
+
+SELECT
+    COUNT(DISTINCT id_user) AS n_users
+FROM airbnb_searches
