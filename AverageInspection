@@ -1,0 +1,12 @@
+/*
+Find the average of inspections scores between 91 and 100
+Find the mean of inspections scores between 91 and 100.
+Assuming that the scores are normally distributed.
+*/
+
+CODE:
+
+SELECT
+    AVG(score) AS avg_score
+FROM los_angeles_restaurant_health_inspections
+WHERE score BETWEEN 91 AND 100
