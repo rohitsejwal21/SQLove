@@ -1,0 +1,10 @@
+/*
+Find all workers whose first name ends with the letter 'a'
+*/
+
+CODE:
+
+SELECT 
+    * 
+FROM worker
+WHERE first_name LIKE '%a'
