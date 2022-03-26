@@ -1,0 +1,12 @@
+/*
+Count the number of cancelled flights by American Airlines (AA).
+*/
+
+CODE:
+
+SELECT
+    COUNT(*) AS n_flights
+FROM us_flights
+WHERE 
+    cancelled = 1 AND 
+    unique_carrier = 'AA'
