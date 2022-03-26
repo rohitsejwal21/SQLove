@@ -1,0 +1,15 @@
+/*
+Count the number of companies in the Information Technology sector in each country. 
+Output the result along with the corresponding country name.
+Order the result based on the number of companies in the descending order.
+*/
+
+CODE:
+
+SELECT
+    country,
+    COUNT(*) AS n_companies
+FROM forbes_global_2010_2014
+WHERE sector = 'Information Technology'
+GROUP BY country
+ORDER BY n_companies DESC
