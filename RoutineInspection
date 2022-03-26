@@ -1,0 +1,12 @@
+/*
+Find all routine inspections where high-risk issues were found
+*/
+
+CODE:
+
+SELECT
+    *
+FROM los_angeles_restaurant_health_inspections
+WHERE 
+    pe_description ILIKE '%HIGH%' AND
+    service_description = 'ROUTINE INSPECTION'
