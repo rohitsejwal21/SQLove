@@ -1,0 +1,10 @@
+/*
+Find details of workers excluding those with the first name 'Vipul' or 'Satish'
+*/
+
+CODE:
+
+SELECT 
+    * 
+FROM worker 
+WHERE first_name NOT in ('Vipul','Satish')
