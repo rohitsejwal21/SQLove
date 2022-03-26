@@ -1,0 +1,14 @@
+/*
+Find the number of workers by department.
+Output the department name along with the corresponding number of workers.
+Sort records based on the number of workers in descending order.
+*/
+
+CODE:
+
+SELECT 
+    department, 
+    COUNT(worker_id) AS n_workers 
+FROM worker 
+GROUP BY department 
+ORDER BY n_workers DESC
