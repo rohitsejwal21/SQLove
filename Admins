@@ -1,0 +1,10 @@
+/*
+Find the number of employees working in the Admin department
+*/
+
+CODE:
+
+SELECT 
+    COUNT(*) AS n_admins
+FROM worker
+WHERE department like 'Admin'
