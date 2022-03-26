@@ -1,0 +1,15 @@
+/*
+Find the industry which has the lowest sales compared to all industries
+*/
+
+CODE:
+
+SELECT
+    industry
+FROM forbes_global_2010_2014
+GROUP BY industry
+HAVING 
+    AVG(profits) > 0 AND
+    industry IS NOT NULL
+ORDER BY MIN(sales) ASC
+LIMIT 1
