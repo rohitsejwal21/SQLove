@@ -1,5 +1,8 @@
---Acceptance Rate By Date
---What is the overall friend acceptance rate by date? Your output should have the rate of acceptances by the date the request was sent. Order by the earliest date to latest.
+/*
+Acceptance Rate By Date
+What is the overall friend acceptance rate by date? Your output should have the rate of acceptances by the date the request was sent. 
+Order by the earliest date to latest.
+*/
 
 TABLE: fb_friend_requests
 user_id_sender    - varchar
@@ -7,6 +10,7 @@ user_id_receiver  - varchar
 date              - datetime
 action            - varchar
 
+CODE:
 
 SELECT 
     a.date,
