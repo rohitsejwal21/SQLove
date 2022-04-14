@@ -1,7 +1,10 @@
 /*
 Avg Earnings per Weekday and Hour
-Write a query that returns the average earnings per hour by day of the week. For calculating the time period use 'Customer placed order datetime' field. Earnings value is 'Order total' field.
-Note: Our questions mimic real-life scenarios, where you would be working with different timezones, hence any day_of_week function works, but for the sake of having your answer accepted, consider the day_of_week function that marks Monday as 1 and Sunday as 7
+Write a query that returns the average earnings per hour by day of the week. 
+For calculating the time period use 'Customer placed order datetime' field. Earnings value is 'Order total' field.
+Note: Our questions mimic real-life scenarios, 
+where you would be working with different timezones, hence any day_of_week function works, 
+but for the sake of having your answer accepted, consider the day_of_week function that marks Monday as 1 and Sunday as 7
 */
 
 CODE:
