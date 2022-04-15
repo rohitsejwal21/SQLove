@@ -8,7 +8,7 @@ CODE:
 
 SELECT 
     acquired_quarter,
-    COUNT(id) AS cnt_acq
+    COUNT(id) AS count_acq
 FROM crunchbase_acquisitions
 GROUP BY acquired_quarter
 ORDER BY cnt_acq DESC
