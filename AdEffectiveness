@@ -15,5 +15,5 @@ FROM uber_advertising
 WHERE 
     year = 2017 OR
     year = 2018
-GROUP BY advertising_channel
+GROUP BY 1
 ORDER BY 2
