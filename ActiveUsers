@@ -7,9 +7,9 @@ CODE:
 
 SELECT
     SUM(
-        CASE
-            WHEN status = 'open' THEN 1.0
-            ELSE 0.0
-        END) / count(user_id) AS active_user_share
+    CASE
+        WHEN status = 'open' THEN 1.0
+        ELSE 0.0
+    END) / COUNT(user_id) AS active_user_share
 FROM fb_active_users
 WHERE country = 'USA'
