@@ -1,6 +1,7 @@
 /*
 Most Expensive And Cheapest Wine
-Find the cheapest and the most expensive variety in each region. Output the region along with the corresponding most expensive and the cheapest variety.
+Find the cheapest and the most expensive variety in each region. 
+Output the region along with the corresponding most expensive and the cheapest variety.
 */
 
 CODE:
