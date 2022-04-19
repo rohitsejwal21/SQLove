@@ -1,6 +1,6 @@
 /*
 Flights With No Delay
-Find all US flight details which had no delay.
+Find all US flight details which had no delay
 */
 
 CODE:
