@@ -23,7 +23,6 @@ HAVING
     COUNT(o.id) > 3 AND
     SUM(o.total_order_cost) > 100
     
-    
 /*
 WITH cust_orders AS
     (
