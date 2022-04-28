@@ -10,11 +10,11 @@ SELECT
     owner_name
 FROM la_restaurant_health_inspections
 WHERE facility_name IN
-    (
-    SELECT
-        facility_name
-    FROM la_restaurant_health_inspections
-    GROUP BY facility_name
-    HAVING 
-        COUNT(DISTINCT grade) = 3
-    )
+(
+SELECT
+    facility_name
+FROM la_restaurant_health_inspections
+GROUP BY facility_name
+HAVING 
+    COUNT(DISTINCT grade) = 3
+)
