@@ -1,7 +1,10 @@
 /*
 Department Salaries
 Find the number of male and female employees per department and also their corresponding total salaries.
-Output department names along with the corresponding number of female employees, the total salary of female employees, the number of male employees, and the total salary of male employees.
+Output department names along with the corresponding number of female employees, 
+the total salary of female employees, 
+the number of male employees, 
+and the total salary of male employees.
 */
 
 CODE:
