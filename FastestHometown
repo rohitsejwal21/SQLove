@@ -11,12 +11,12 @@ SELECT
     hometown,
     avg_time
 FROM
-    (
-    SELECT
-        hometown,
-        AVG(net_time) AS avg_time,
-        DENSE_RANK() OVER (ORDER BY AVG(net_time)) AS ranking
-    FROM marathon_male
-    GROUP BY hometown
-    ) avg_times
+(
+SELECT
+    hometown,
+    AVG(net_time) AS avg_time,
+    DENSE_RANK() OVER (ORDER BY AVG(net_time)) AS ranking
+FROM marathon_male
+GROUP BY hometown
+) avg_times
 WHERE ranking <= 3
