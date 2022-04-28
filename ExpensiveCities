@@ -6,14 +6,18 @@ Write a query that identifies cities with higher than average home prices when c
 CODE:
 
 WITH home_details AS
-    (
-    SELECT
-        AVG(mkt_price) AS national_avg_price
-    FROM zillow_transactions
-    )
+(
+SELECT
+    AVG(mkt_price) AS national_avg_price
+FROM zillow_transactions
+)
 
 SELECT
     city
 FROM zillow_transactions zt
 GROUP BY city
-HAVING AVG(mkt_price) > (SELECT national_avg_price FROM home_details)
+HAVING 
+    AVG(mkt_price) > 
+    (
+        SELECT national_avg_price FROM home_details
+    )
