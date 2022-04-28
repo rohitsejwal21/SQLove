@@ -6,13 +6,13 @@ Given a list of a company's employees, find the name of the manager from the lar
 CODE:
 
 WITH department_rank AS
-    (
-    SELECT
-        department_name,
-        RANK() OVER (ORDER BY COUNT(id) DESC) AS rnk
-    FROM az_employees
-    GROUP BY department_name
-    )
+(
+SELECT
+    department_name,
+    RANK() OVER (ORDER BY COUNT(id) DESC) AS rnk
+FROM az_employees
+GROUP BY department_name
+)
 
 SELECT
     e.first_name,
