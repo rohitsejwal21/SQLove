@@ -7,25 +7,27 @@ Also, calculate the longest period without firing anyone.
 CODE:
 
 WITH hired AS
-    (
-    SELECT
-        hire_date,
-        hire_date - LAG(hire_date, 1) OVER (ORDER BY hire_date) AS no_hire_period
-    FROM uber_employees
-    GROUP BY hire_date
-    ),
-    
-    fired AS
-    (
-    SELECT
-        termination_date,
-        termination_date - LAG(termination_date, 1) OVER (ORDER BY termination_date) AS no_fire_period
-    FROM uber_employees
-    WHERE termination_date IS NOT NULL
-    GROUP BY termination_date
-    )
+(
+SELECT
+    hire_date,
+    hire_date - LAG(hire_date, 1) OVER (ORDER BY hire_date) AS no_hire_period
+FROM uber_employees
+GROUP BY hire_date
+),
+
+fired AS
+(
+SELECT
+    termination_date,
+    termination_date - LAG(termination_date, 1) OVER (ORDER BY termination_date) AS no_fire_period
+FROM uber_employees
+WHERE termination_date IS NOT NULL
+GROUP BY termination_date
+)
     
 SELECT
     MAX(no_hire_period) AS max_hire,
     MAX(no_fire_period) AS max_fire
-FROM hired, fired
+FROM 
+    hired, 
+    fired
