@@ -4,6 +4,7 @@ Output the employee name along with the corresponding base pay.
 */
 
 CODE:
+
 select
     employeename,
     basepay
