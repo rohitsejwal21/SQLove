@@ -1,23 +1,24 @@
 /*
 City With The Highest and Lowest Income Variance
-What cities recorded the largest growth and biggest drop in order amount between March 11, 2019, and April 11, 2019. Your output should include the names of the cities and the amount of growth/drop.
+What cities recorded the largest growth and biggest drop in order amount between March 11, 2019, and April 11, 2019. 
+Your output should include the names of the cities and the amount of growth/drop.
 */
 
 CODE:
 
 WITH amount AS
-    (
-    SELECT
-        TO_CHAR(order_timestamp_utc, 'YYYY-MM-DD') AS date,
-        name,
-        LAG(SUM(amount), 1) OVER (PARTITION BY name ORDER BY TO_CHAR(order_timestamp_utc, 'YYYY-MM-DD') DESC) - SUM(amount) AS amount_diff
-    FROM postmates_orders po
-    JOIN postmates_markets pm ON
-        pm.id = po.city_id
-    GROUP BY 
-        date, 
-        name
-    )
+(
+SELECT
+    TO_CHAR(order_timestamp_utc, 'YYYY-MM-DD') AS date,
+    name,
+    LAG(SUM(amount), 1) OVER (PARTITION BY name ORDER BY TO_CHAR(order_timestamp_utc, 'YYYY-MM-DD') DESC) - SUM(amount) AS amount_diff
+FROM postmates_orders po
+JOIN postmates_markets pm ON
+    pm.id = po.city_id
+GROUP BY 
+    date, 
+    name
+)
 
 SELECT
     name,
