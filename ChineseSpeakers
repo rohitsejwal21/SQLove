@@ -8,7 +8,11 @@ CODE:
 SELECT
     company_id
 FROM playbook_users
-WHERE language = 'chinese'
-GROUP BY company_id
-HAVING COUNT(*) >= 2
-ORDER BY company_id
+WHERE 
+    language = 'chinese'
+GROUP BY 
+    company_id
+HAVING 
+    COUNT(*) >= 2
+ORDER BY 
+    company_id
