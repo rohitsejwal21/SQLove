@@ -1,6 +1,7 @@
 /*
 Common Letters
-Find the top 3 most common letters across all the words from both the tables. Output the letter along with the number of occurrences and order records in descending order based on the number of occurrences.
+Find the top 3 most common letters across all the words from both the tables. 
+Output the letter along with the number of occurrences and order records in descending order based on the number of occurrences.
 */
 
 CODE:
