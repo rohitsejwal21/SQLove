@@ -17,8 +17,6 @@ FROM
         COUNT(*) AS order_volume,
         DENSE_RANK() OVER (ORDER BY COUNT(*) DESC) AS rnk
     FROM postmates_orders
-    GROUP BY 
-        1,
-        2
+    GROUP BY 1, 2
     ) vol
 WHERE rnk = 1
