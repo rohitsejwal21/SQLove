@@ -1,7 +1,10 @@
 /*
 Health Inspections Per Street
-Find the number of inspections for each street name where a risk category value is assigned. Output the result along with the street name. Order the results based on the number of inspections in descending order.
-It's hard to catch every variation of how street names are written but your code should skip street names that include only 1 letter like the street named 'b' in 295 B Orizaba Ave. The letter 'b' is an element of the "house number" and not the street name. Rather than extracting 'b', Orizaba should be returned.
+Find the number of inspections for each street name where a risk category value is assigned. 
+Output the result along with the street name. Order the results based on the number of inspections in descending order.
+It's hard to catch every variation of how street names are written but your code should skip street names that include only 1 letter like the street named 'b' in 295 B Orizaba Ave. 
+The letter 'b' is an element of the "house number" and not the street name. 
+Rather than extracting 'b', Orizaba should be returned.
 */
 
 CODE:
