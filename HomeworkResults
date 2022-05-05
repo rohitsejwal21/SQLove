@@ -9,11 +9,12 @@ Note that it's possible for several students to have the same first name but the
 CODE:
 
 SELECT
-    --hw.student_id,
     st.student_firstname,
     COUNT(grade) / COUNT(homework_id)::float * 100 AS completion_rate,
     AVG(grade) AS avg_grades
 FROM allstate_homework hw
 JOIN allstate_students st ON
     st.student_id = hw.student_id
-GROUP BY hw.student_id, st.student_firstname
+GROUP BY 
+    hw.student_id, 
+    st.student_firstname
